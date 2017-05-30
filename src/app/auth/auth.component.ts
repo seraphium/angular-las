@@ -24,8 +24,11 @@ export class AuthComponent implements OnInit {
     private userService: UserService
   ){
     this.authForm = this.fb.group({
-      'email': ['', Validators.required],
-      'password': ['', Validators.required]
+      'name': ['', Validators.required],
+      'phonenum': ['', Validators.required],
+      'password': ['', Validators.required],
+      'dept': ['', Validators.required],
+      'line': ['', Validators.required]
     })
   }
 
@@ -43,6 +46,9 @@ export class AuthComponent implements OnInit {
     this.isSubmitting = true;
     this.errors = new Errors();
     let credential = this.authForm.value;
+    if (this.authType === 'login') {
+      credential = {'name': credential.name, 'password': credential.password}
+    }
     this.userService.attemptAuth(this.authType,  credential)
       .subscribe(
         data => this.router.navigateByUrl('/'),
