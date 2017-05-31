@@ -5,7 +5,7 @@
 
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute } from '@angular/router';
-import {User, UserService, Profile }from '../shared';
+import {User, UserService }from '../shared';
 
 @Component({
   selector: 'profile-page',
@@ -18,27 +18,26 @@ export class ProfileComponent implements OnInit  {
     private userService: UserService
 ){}
 
-    profile: Profile;
     currentUser: User;
     isUser: boolean;
 
     ngOnInit(){
       this.route.data.subscribe(
-        (data: {profile: Profile}) => {
-          this.profile = data.profile;
+        (data: {user: User}) => {
+          this.currentUser = data.user;
         }
       );
 
       this.userService.currentUser.subscribe(
         (userData: User) => {
           this.currentUser = userData;
-          this.isUser = (this.currentUser.username === this.profile.username);
+          this.isUser = (this.currentUser.name === this.currentUser.name);
         }
       )
     }
 
     onToggleFollowing(following: boolean) {
-      this.profile.following = following;
+      //this.profile.following = following;
 
     }
 

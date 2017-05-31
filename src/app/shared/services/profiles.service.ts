@@ -7,23 +7,24 @@
 import {Injectable} from "@angular/core";
 import {ApiService} from "./api.service";
 import {Observable} from "rxjs/Observable";
-import {Profile} from "../models/";
+import {User} from "../models/";
+
 @Injectable()
 export class ProfilesService {
   constructor(
     private apiService: ApiService
   ){}
 
-  get(username: string) : Observable<Profile>  {
-      return this.apiService.get('/profiles/' + username)
-        .map((data: {profile: Profile}) => data.profile);
+  get() : Observable<User>  {
+      return this.apiService.get('/user/')
+        .map((data: {user: User}) => data.user);
   }
 
-  follow(username: string)  : Observable<Profile> {
+  follow(username: string)  : Observable<User> {
       return  this.apiService.post('/profiles/' + username + '/follow');
   }
 
-  unfollow(username: string) : Observable<Profile> {
-      return this.apiService.delete('/profiles/' + username + '/follow');
+  unfollow(username: string) : Observable<User> {
+    return this.apiService.delete('/profiles/' + username + '/follow');
   }
 }

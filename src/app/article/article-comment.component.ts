@@ -22,7 +22,7 @@ export class ArticleCommentComponent implements OnInit{
   ngOnInit(){
     this.userService.currentUser.subscribe(
       (userData: User) => {
-        this.canModify = (userData.username == this.comment.author.username);
+        this.canModify = (userData.name == this.comment.author.username);
       }
     )
   }
