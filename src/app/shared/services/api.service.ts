@@ -82,6 +82,8 @@ export class ApiService{
 
           let jsonRes = res.json();
           console.log(`put res:${JSON.stringify(jsonRes)}`);
+
+          return jsonRes;
         })
   }
 

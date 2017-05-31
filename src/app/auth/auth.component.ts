@@ -27,6 +27,7 @@ export class AuthComponent implements OnInit {
       'name': ['', Validators.required],
       'phonenum': ['', Validators.required],
       'password': ['', Validators.required],
+      'password2': ['', Validators.required],
       'dept': ['', Validators.required],
       'line': ['', Validators.required]
     })
@@ -46,6 +47,12 @@ export class AuthComponent implements OnInit {
     this.isSubmitting = true;
     this.errors = new Errors();
     let credential = this.authForm.value;
+    if (credential.password != credential.password2){
+      this.errors = {'errors':{'Password': 'not match'}};
+      this.isSubmitting = false;
+      return;
+    }
+    delete credential['password2'];
     if (this.authType === 'login') {
       credential = {'name': credential.name, 'password': credential.password}
     }

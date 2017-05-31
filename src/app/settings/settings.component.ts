@@ -9,6 +9,7 @@ import {User} from "../shared/models/user.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {UserService} from "../shared/services/user.service";
+import {Errors} from "../shared/models/errors.model";
 
 
 @Component({
@@ -18,7 +19,7 @@ import {UserService} from "../shared/services/user.service";
 export class SettingsComponent implements OnInit{
   user: User = new User();
   settingsForm:  FormGroup;
-  errors: Object = {};
+  errors: Errors = new Errors();
   isSubmitting: boolean = false;
 
   constructor(
@@ -34,6 +35,7 @@ export class SettingsComponent implements OnInit{
       dept: '',
       line:'',
       password:'',
+      password2:''
     })
   }
 
@@ -52,18 +54,30 @@ export class SettingsComponent implements OnInit{
   }
 
   submitForm(){
+    this.errors = new Errors();
+
+    if (this.settingsForm.value.password != this.settingsForm.value.password2){
+      this.errors = {'errors':{'Password': 'not match'}};
+      return;
+    }
     this.isSubmitting = true;
-    this.updateUser(this.settingsForm.value);
+    let value = this.settingsForm.value;
+    if (value.password === null|| value.password === "") {
+      delete value["password"];
+    }
+    delete value["password2"];
+    this.updateUser(value);
 
     this.userService
       .update(this.user)
       .subscribe(
-        updatedUser => this.router.navigateByUrl('/profile' + updatedUser.name),
+        updatedUser => {
+          this.router.navigateByUrl('/profile/' + updatedUser.name)
+        },
         err => {
           this.errors = err;
           this.isSubmitting = false;
-        }
-      );
+        });
   }
 
 }
