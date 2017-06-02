@@ -19,6 +19,7 @@ import {ArticleModule} from "./article/article.module";
 import {CommentsService} from "./shared/services/comments.service";
 import {TagsService} from "./shared/services/tags.service";
 
+
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], {useHash:true});
 
 @NgModule({
@@ -37,7 +38,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], {useHash:true}
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   providers: [
     ApiService,

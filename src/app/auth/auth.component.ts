@@ -47,7 +47,7 @@ export class AuthComponent implements OnInit {
     this.isSubmitting = true;
     this.errors = new Errors();
     let credential = this.authForm.value;
-    if (credential.password != credential.password2){
+    if (this.authType === 'register' && (credential.password != credential.password2)){
       this.errors = {'errors':{'Password': 'not match'}};
       this.isSubmitting = false;
       return;

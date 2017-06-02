@@ -43,7 +43,7 @@
               class="form-control form-control-lg"
               type="password" />
           </fieldset>
-            <fieldset class="form-group">
+            <fieldset class="form-group"  *ngIf="authType =='register'">
               <input class="form-control form-control-lg" type="password"
                      placeholder="Repeat Password" formControlName="password2"/>
             </fieldset>
