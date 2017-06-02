@@ -1,0 +1,17 @@
+<div class="sidebar">
+  <p>Unit List</p>
+  <div class="list-group">
+      <div class="list-group-item"  *ngFor="let city of units | unittype: 0">
+      <button type="button" class="btn btn-secondary" (click)="unitClicked(city)">{{city.name}}</button>
+        <div class="list-group-item" *ngFor="let line of units | unittype: 1 | unitparent: city " >
+            <button type="button" class="btn btn-secondary" (click)="unitClicked(line)">{{line.name}}</button>
+          <div class="list-group-item" *ngFor="let unit of units | unittype: 2 | unitparent: line " >
+            <button type="button" class="btn btn-secondary" (click)="unitClicked(unit)" >{{unit.name}}</button>
+
+          </div>
+          </div>
+
+
+    </div>
+  </div>
+</div>

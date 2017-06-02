@@ -5,8 +5,8 @@ import { User } from './user.model';
 
 export class Unit {
   id: number;
-  parent : Unit;
-  owner = User;
+  parent : number;
+  owner :number;
   unittypes : number;
   type : number;
   name : string;
@@ -27,7 +27,7 @@ export class Unit {
   lng : number;
   unsync : boolean;
   active : boolean;
-  operators : Array<User>;
+  operators : Array<number>;
   status : number;
   powerstatus : number;
   gprsstatus : number;
