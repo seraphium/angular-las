@@ -2,7 +2,7 @@
  * Created by zezhang on 2017/5/9.
  */
 
-import {Component, OnInit} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {Report} from "../shared/models/report.model";
 import {User} from "../shared/models/user.model";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -10,10 +10,11 @@ import {ReportService} from "../shared/services/reports.service";
 import {UserService} from "../shared/services/user.service";
 import {FormControl} from "@angular/forms";
 import {isUndefined} from "util";
+import {ReportListConfig} from "../shared/models/report-list-config.model";
 
 
 @Component({
-  selector: 'article-page',
+  selector: 'reportlist',
   templateUrl: './report.component.html'
 })
 export class ReportComponent implements OnInit {
@@ -22,6 +23,8 @@ export class ReportComponent implements OnInit {
   canModify: boolean;
   isSubmitting = false;
   isDeleting = false;
+
+  @Input() type: string = 'report';
 
   constructor(
     private route: ActivatedRoute,

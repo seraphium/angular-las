@@ -4,7 +4,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ArticleListConfig, TagsService, UserService } from '../shared';
+import { ReportListConfig, TagsService, UserService } from '../shared';
 
 
 @Component({
@@ -20,9 +20,8 @@ export class HomeComponent implements OnInit{
   ) {}
 
   isAuthenticated: boolean;
-  listConfig: ArticleListConfig = new ArticleListConfig();
+  listConfig: ReportListConfig = new ReportListConfig();
   tags: Array<string> = [];
-  tagsLoaded: boolean = false;
 
   ngOnInit() {
     this.userService.isAuthenticated.subscribe(
@@ -30,24 +29,16 @@ export class HomeComponent implements OnInit{
         this.isAuthenticated = authenticated;
 
         if (authenticated) {
-          this.setListTo('feed');
-        } else {
-          this.setListTo('all');
+          this.setListTo('report');
         }
-      }
-    );
-
-    this.tagsService.getAll()
-      .subscribe( tags => {
-        this.tags = tags;
-        this.tagsLoaded = true;
       });
+
 
   }
 
 
   setListTo(type: string = '', filter: Object = {}) {
-    if (type === 'feed' && !this.isAuthenticated) {
+    if (!this.isAuthenticated) {
       this.router.navigateByUrl('/login');
       return;
     }

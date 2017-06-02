@@ -10,6 +10,8 @@ import { UnitbarComponent } from '../shared/unitbar/unitbar.component';
 import { UnitService } from '../shared/services/units.service';
 import { UnitTypeFilterPipe } from '../shared';
 import { UnitParentFilterPipe } from '../shared';
+import {ReportModule} from "../reports/report.module";
+import {ReportComponent} from "../reports/report.component";
 
 const homeRouting: ModuleWithProviders = RouterModule.forChild([
   {
@@ -24,10 +26,12 @@ const homeRouting: ModuleWithProviders = RouterModule.forChild([
 @NgModule({
   imports: [
     homeRouting,
-    SharedModule
+    SharedModule,
+    ReportModule
   ],
   declarations: [
     HomeComponent,
+    ReportComponent,
     UnitbarComponent,
     UnitTypeFilterPipe,
     UnitParentFilterPipe

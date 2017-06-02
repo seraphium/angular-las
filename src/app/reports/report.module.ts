@@ -11,7 +11,7 @@ import {ReportService} from "../shared/services/reports.service";
 
 const reportRouting: ModuleWithProviders = RouterModule.forChild([
   {
-    path: 'reports/:id',
+    path: 'reports/',
     component: ReportComponent,
     resolve:{
       report: ReportResolver
@@ -27,7 +27,6 @@ const reportRouting: ModuleWithProviders = RouterModule.forChild([
     SharedModule
   ],
   declarations:  [
-    ReportComponent,
   ],
   providers: [
     ReportResolver,
