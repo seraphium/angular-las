@@ -8,12 +8,17 @@ import {Observable} from "rxjs/Observable";
 import {Unit} from "../models/unit.model";
 import {UnitListConfig} from "../models/unit-list-config.model";
 import {URLSearchParams} from '@angular/http';
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 @Injectable()
 export class UnitService  {
   constructor(
     private apiService: ApiService
   ){}
+
+  public selectedUnitSubject = new BehaviorSubject<Unit>(new Unit());
+  public selectedUnit = this.selectedUnitSubject.asObservable().distinctUntilChanged();
+
 
   query(config: UnitListConfig): Observable<{units: Unit[], unitsCount: number}>  {
       let params: URLSearchParams =  new URLSearchParams();

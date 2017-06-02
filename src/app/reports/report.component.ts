@@ -5,12 +5,15 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {Report} from "../shared/models/report.model";
 import {User} from "../shared/models/user.model";
+import {Unit} from '../shared/models/unit.model';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ReportService} from "../shared/services/reports.service";
 import {UserService} from "../shared/services/user.service";
 import {FormControl} from "@angular/forms";
 import {isUndefined} from "util";
 import {ReportListConfig} from "../shared/models/report-list-config.model";
+import {UnitbarComponent} from "../shared/unitbar/unitbar.component";
+import {UnitService} from "../shared/services/units.service";
 
 
 @Component({
@@ -23,14 +26,15 @@ export class ReportComponent implements OnInit {
   canModify: boolean;
   isSubmitting = false;
   isDeleting = false;
-
+  selectedUnit: Unit;
   @Input() type: string = 'report';
 
   constructor(
     private route: ActivatedRoute,
     private reportService:  ReportService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private unitService: UnitService
   ){
 
   }
@@ -52,12 +56,18 @@ export class ReportComponent implements OnInit {
       }
     );
 
-    this.reportService.getall().subscribe(reports => {
-      if (isUndefined(reports)){
-        this.reports = new Array<Report>();
-      } else {
-        this.reports = reports.reports;
-      }
+
+
+    this.unitService.selectedUnit.subscribe(unit => {
+      this.selectedUnit = unit;
+      console.log("report selected unit:" + unit.id);
+      this.reportService.getall().subscribe(reports => {
+        if (isUndefined(reports)){
+          this.reports = new Array<Report>();
+        } else {
+          this.reports = reports.report;
+        }
+      })
     })
 
   }

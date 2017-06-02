@@ -9,7 +9,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {UnitService} from "../services/units.service";
 import {UserService} from "../services/user.service";
 import {isUndefined} from "util";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 
 @Component({
@@ -32,8 +31,6 @@ export class UnitbarComponent implements OnInit {
 
   }
 
-  private selectedUnitSubject = new BehaviorSubject<Unit>(new Unit());
-  public selectedUnit = this.selectedUnitSubject.asObservable().distinctUntilChanged();
 
   ngOnInit()
   {
@@ -51,16 +48,13 @@ export class UnitbarComponent implements OnInit {
       } else {
         this.units = units.units;
       }
-    })
+    });
 
-    this.selectedUnit.subscribe(unit => {
-      console.log("unit selected:" + unit.id)
-    })
   }
 
   unitClicked(unit: Unit) {
       console.log("clicked" + unit.type + "id:" + unit.id);
-      this.selectedUnitSubject.next(unit);
+      this.unitService.selectedUnitSubject.next(unit);
   }
 
  /* onToggleFavorite(favorited: boolean) {
