@@ -9,4 +9,5 @@ export * from './article.model';
 export * from './comment.model';
 export * from './article-list-config.model';
 export * from './unit-list-config.model';
+export * from './report-list-config.model';
 
