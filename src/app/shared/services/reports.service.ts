@@ -35,7 +35,7 @@ export class ReportService  {
         .map(data => data.units);
   }
 
-  getall(): Observable<{units: Report[], unitsCount: number}> {
+  getall(): Observable<{reports: Report[], reportsCount: number}> {
     return this.apiService.get('/reports/')
       .map(data => data);
   }
