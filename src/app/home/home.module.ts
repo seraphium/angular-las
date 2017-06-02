@@ -12,6 +12,7 @@ import { UnitTypeFilterPipe } from '../shared';
 import { UnitParentFilterPipe } from '../shared';
 import {ReportModule} from "../reports/report.module";
 import {ReportComponent} from "../reports/report.component";
+import {UnitinfoComponent} from "../shared/unitinfo/unitinfo.component";
 
 const homeRouting: ModuleWithProviders = RouterModule.forChild([
   {
@@ -33,6 +34,7 @@ const homeRouting: ModuleWithProviders = RouterModule.forChild([
     HomeComponent,
     ReportComponent,
     UnitbarComponent,
+    UnitinfoComponent,
     UnitTypeFilterPipe,
     UnitParentFilterPipe
   ],

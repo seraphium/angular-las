@@ -47,6 +47,10 @@ export class UnitbarComponent implements OnInit {
         this.units = new Array<Unit>();
       } else {
         this.units = units.units;
+        if (this.units.length > 0) {
+          this.unitService.selectedUnitSubject.next(this.units[0]);
+
+        }
       }
     });
 

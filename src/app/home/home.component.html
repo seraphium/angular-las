@@ -8,34 +8,43 @@
 
 <div class="container page">
   <div class="row">
-    <div class="col-md-9">
-      <div class="feed-toggle">
-        <ul class="nav nav-pills outline-active">
-          <li class="nav-item">
-            <a class="nav-link" [ngClass]="{'active': listConfig.type === 'report'}"
-            (click)="setListTo('report')">
-              Reports
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [ngClass]="{'active': listConfig.type === 'devicereport' }"
-            (click)="setListTo('devicereport')">
-              DeviceReports
-            </a>
-          </li>
-          <li class="nav-item" [hidden]="!listConfig.filters.tag">
-            <a class="nav-link active">
-              <i class="ion-pound"></i> {{listConfig.filters.tag}}
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <reportlist [type]="listConfig.type"></reportlist>
-    </div>
-
     <div class="col-md-3">
       <unitbar></unitbar>
     </div>
+    <div class="col-md-9">
+      <div class="row">
+      <div class="col-md-3">
+        <unitinfo></unitinfo>
+      </div>
+      </div>
+      <div class="row">
+        <div class="feed-toggle">
+          <ul class="nav nav-pills outline-active">
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{'active': listConfig.type === 'report'}"
+                 (click)="setListTo('report')">
+                Reports
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{'active': listConfig.type === 'devicereport' }"
+                 (click)="setListTo('devicereport')">
+                DeviceReports
+              </a>
+            </li>
+            <li class="nav-item" [hidden]="!listConfig.filters.tag">
+              <a class="nav-link active">
+                <i class="ion-pound"></i> {{listConfig.filters.tag}}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+        <div class="row">
+          <reportlist [type]="listConfig.type"></reportlist>
+
+        </div>
+     </div>
+
   </div>
 </div>
