@@ -2,10 +2,14 @@
  * Created by zezhang on 2017/5/8.
  */
 
-export class Report {
+export class BaseReport {
   id: number;
   unit_id : number;
   time :string;
+}
+
+export class Report extends BaseReport {
+
   distance1current : number;
   distance1quota : number;
   distance2current : number;
@@ -19,6 +23,29 @@ export class Report {
   hasmedia : boolean;
   statusid : number;
   weather : string;
+
+
+}
+
+
+export class DeviceReport extends BaseReport {
+  temperature: string;
+  csq : number;
+  mode : number;
+  resetcount : number;
+  networkstatus  : number;
+  protocolversion  : number;
+  hardwareversion  : number;
+  softwareversion  : number;
+
+  picresolution : string;
+  picenable : boolean;
+  piclightenhance : boolean;
+  highsensitivity: boolean;
+  beep: boolean;
+  status : boolean;
+  powerstatus : boolean;
+  gprsstatus : boolean;
 
 
 }

@@ -4,6 +4,7 @@
 export * from './errors.model';
 export * from './user.model';
 export * from './unit.model';
+export * from './report.model';
 export * from './profile.model';
 export * from './article.model';
 export * from './comment.model';

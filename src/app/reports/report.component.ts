@@ -3,7 +3,7 @@
  */
 
 import {Component, Input, OnInit} from "@angular/core";
-import {Report} from "../shared/models/report.model";
+import {Report, DeviceReport} from "../shared/models";
 import {User} from "../shared/models/user.model";
 import {Unit} from '../shared/models/unit.model';
 import {ActivatedRoute, Router} from "@angular/router";
@@ -22,6 +22,7 @@ import {UnitService} from "../shared/services/units.service";
 })
 export class ReportComponent implements OnInit {
   reports: Array<Report>;
+  devicereports: Array<DeviceReport>;
   currentUser: User;
   canModify: boolean;
   isSubmitting = false;
@@ -41,14 +42,7 @@ export class ReportComponent implements OnInit {
 
   ngOnInit()
   {
-    /*this.route.data.subscribe(
-      (data: {article: Article}) => {
-        this.article = data.article;
 
-        this.populateComments();
-      }
-    );
-*/
     this.userService.currentUser.subscribe(
       (userData: User) => {
         this.currentUser = userData;
@@ -61,7 +55,9 @@ export class ReportComponent implements OnInit {
     this.unitService.selectedUnit.subscribe(unit => {
       this.selectedUnit = unit;
       console.log("report selected unit:" + unit.id);
-      this.reportService.getall().subscribe(reports => {
+      let queryConfig = new ReportListConfig();
+      queryConfig.filters.unit_id = unit.id;
+      this.reportService.query(queryConfig).subscribe(reports => {
         if (isUndefined(reports)){
           this.reports = new Array<Report>();
         } else {
@@ -72,70 +68,5 @@ export class ReportComponent implements OnInit {
 
   }
 
-  /*onToggleFavorite(favorited: boolean) {
-    this.article.favorited = favorited;
-
-    if (favorited) {
-      this.article.favoritesCount++;
-    } else {
-      this.article.favoritesCount--;
-    }
-  }
-
-  onToggleFollowing(following: boolean) {
-      this.article.author.following = following;
-  }
-
-  deleteArticle() {
-      this.isDeleting = true;
-      this.articlesService.destroy(this.article.slug)
-        .subscribe(
-          success => {
-            this.router.navigateByUrl('/');
-          }
-        )
-  }
-
-  populateComments() {
-      this.commentsService.getAll(this.article.slug)
-        .subscribe(comments => {
-          if (isUndefined(comments)){
-            this.comments = new Array<Comment>();
-          }  else {
-            this.comments = comments;
-          }
-        });
-
-  }
-
-  addComment() {
-      this.isSubmitting = true;
-      this.commentFormErrors = {};
-
-      let commentBody = this.commentControl.value;
-      this.commentsService
-        .add(this.article.slug, commentBody)
-        .subscribe(
-          comment => {
-            this.comments.unshift(comment);
-            this.commentControl.reset('');
-            this.isSubmitting = false;
-          },
-          errors => {
-            this.isSubmitting = false;
-            this.commentFormErrors = errors;
-          }
-        )
-  }
-
-  onDeleteComment(comment){
-      this.commentsService.destroy(comment.id, this.article.slug)
-        .subscribe(
-          success => {
-            this.comments = this.comments.filter((item) => item !== comment);
-          }
-        )
-  }
-   */
 
 }

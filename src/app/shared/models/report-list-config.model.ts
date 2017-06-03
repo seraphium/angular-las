@@ -5,7 +5,8 @@ export class ReportListConfig {
   type: string = 'report';
 
   filters: {
-    lasttime?: string
+    lasttime?: string,
+    unit_id?: number
   } = {};
 }
 
