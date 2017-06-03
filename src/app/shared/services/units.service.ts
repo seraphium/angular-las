@@ -20,6 +20,9 @@ export class UnitService  {
   public selectedUnit = this.selectedUnitSubject.asObservable().distinctUntilChanged();
 
 
+  public unitsSubject = new BehaviorSubject<Unit>(new Unit());
+  public units = this.unitsSubject.asObservable().distinctUntilChanged();
+
   query(config: UnitListConfig): Observable<{units: Unit[], unitsCount: number}>  {
       let params: URLSearchParams =  new URLSearchParams();
       Object.keys(config.filters).forEach(
@@ -42,7 +45,10 @@ export class UnitService  {
 
   getall(): Observable<{units: Unit[], unitsCount: number}> {
     return this.apiService.get('/units/')
-      .map(data => data);
+      .map(data => {
+        this.unitsSubject.next(data.units);
+       return data;
+      });
   }
 
   save(unit): Observable<Unit>  {

@@ -1,7 +1,28 @@
 <div >
 
-  <div>
-    {{type}} Here
+  <table class="table table-striped">
+    <thead class="thead-inverse">
+    <tr>
+      <th>Time</th>
+      <th>Unit Name</th>
+      <th>Distance1</th>
+      <th>Distance2</th>
+      <th>Distance3</th>
+      <th>IsAlert</th>
+      <th>HasMedia</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let report of reports">
+      <td>{{report.time}}</td>
+      <td>{{report.unit_id}}</td>
+      <td>{{report.distance1current}}/{{report.distance1quota}}</td>
+      <td>{{report.distance2current}}/{{report.distance2quota}}</td>
+      <td>{{report.distance3current}}/{{report.distance3quota}}</td>
+      <td>{{report.isalert}}</td>
+      <td>{{report.hasmedia}}</td>
+    </tr>
 
-  </div>
+    </tbody>
+  </table>
 </div>
