@@ -1,10 +1,36 @@
-<div class="card-info">
+<div>
   <p>Unit Info</p>
-  <div>
-    <p >{{selectedUnit.name}}</p>
-    <p >{{selectedUnit.phonenum}}</p>
-    <p >{{selectedUnit.identity}}</p>
-    <p >{{selectedUnit.remark}}</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone number</th>
+            <th>Identity</th>
+            <th>Location</th>
+            <th>Remark</th>
 
+          </thead>
+          <tbody>
+          <tr>
+            <td>{{selectedUnit.name}}</td>
+            <td>{{selectedUnit.phonenum}}</td>
+            <td>{{selectedUnit.identity}}</td>
+            <td>{{selectedUnit.location}}</td>
+            <td>{{selectedUnit.remark}}</td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-3">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-secondary" (click)="getPhoto(selectedUnit)">Get Photo</button>
+        </div>
+      </div>
+    </div>
   </div>
+
 </div>

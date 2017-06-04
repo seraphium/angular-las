@@ -43,7 +43,9 @@ export class UnitinfoComponent implements OnInit {
 
   }
 
-
+ getPhoto(unit: Unit){
+      console.log(unit.id + " get photo");
+ }
 
 
 }

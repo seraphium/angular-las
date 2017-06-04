@@ -1,0 +1,21 @@
+{
+  "name": "ang2-conduit",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Jackie Zhang <viperking@163.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/seraphium/angular-las",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7"
+  }
+}

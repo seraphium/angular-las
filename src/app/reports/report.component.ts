@@ -15,6 +15,7 @@ import {ReportListConfig} from "../shared/models/report-list-config.model";
 import {UnitbarComponent} from "../shared/unitbar/unitbar.component";
 import {UnitService} from "../shared/services/units.service";
 
+declare var $:any;
 
 @Component({
   selector: 'reportlist',
@@ -82,6 +83,12 @@ export class ReportComponent implements OnInit {
         }
       })
     })
+
+  }
+
+  showMedia(report: Report) {
+    $('#mediaModal').modal('show');
+
 
   }
 
