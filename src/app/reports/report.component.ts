@@ -28,7 +28,17 @@ export class ReportComponent implements OnInit {
   isSubmitting = false;
   isDeleting = false;
   selectedUnit: Unit;
-  @Input() type: string = 'report';
+  private _type: string;
+  @Input() set type(newtype: string){
+    if (this._type != newtype){
+      this._type = newtype;
+      console.log("type set to " + this._type);
+    }
+  }
+
+  get type(): string {
+    return this._type;
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -50,8 +60,6 @@ export class ReportComponent implements OnInit {
       }
     );
 
-
-
     this.unitService.selectedUnit.subscribe(unit => {
       this.selectedUnit = unit;
       console.log("report selected unit:" + unit.id);
@@ -62,6 +70,15 @@ export class ReportComponent implements OnInit {
           this.reports = new Array<Report>();
         } else {
           this.reports = reports.report;
+        }
+      })
+      queryConfig.type = 'devicereports';
+      queryConfig.filters.unit_id = unit.id;
+      this.reportService.querydevicereports(queryConfig).subscribe(devicereports => {
+        if (isUndefined(devicereports)){
+          this.devicereports = new Array<DeviceReport>();
+        } else {
+          this.devicereports = devicereports.devicereport;
         }
       })
     })

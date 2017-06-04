@@ -1,6 +1,6 @@
 <div >
 
-  <table class="table table-striped">
+  <table *ngIf="type === 'report'" class="table table-striped">
     <thead class="thead-inverse">
     <tr>
       <th>Time</th>
@@ -10,6 +10,8 @@
       <th>Distance3</th>
       <th>IsAlert</th>
       <th>HasMedia</th>
+      <th>Message</th>
+      <th>Weather</th>
     </tr>
     </thead>
     <tbody>
@@ -21,6 +23,59 @@
       <td>{{report.distance3current}}/{{report.distance3quota}}</td>
       <td>{{report.isalert}}</td>
       <td>{{report.hasmedia}}</td>
+      <td>{{report.message}}</td>
+      <td>{{report.weather}}</td>
+    </tr>
+
+    </tbody>
+  </table>
+  <table *ngIf="type === 'devicereport'" class="table table-striped">
+    <thead class="thead-inverse">
+    <tr>
+      <th>Time</th>
+      <th>Unit Name</th>
+      <th>Temperature</th>
+      <th>CSQ</th>
+      <th>Mode</th>
+      <th>ResetCount</th>
+      <th>NetworkStatus</th>
+      <th>ProtocolVersion</th>
+      <th>HardwareVersion</th>
+      <th>SoftwareVersion</th>
+      <th>PicResolution</th>
+      <th>PicEnable</th>
+      <th>PicLightEnhance</th>
+      <th>HighSensitivity</th>
+      <th>Beep</th>
+      <th>Status</th>
+      <th>PowerStatus</th>
+      <th>GPRSStatus</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let report of devicereports">
+      <td>{{report.time}}</td>
+      <td>{{report.unit_id}}</td>
+      <td>{{report.temperature}}</td>
+      <td>{{report.csq}}</td>
+      <td>{{report.mode}}</td>
+      <td>{{report.resetcount}}</td>
+      <td>{{report.networkstatus}}</td>
+      <td>{{report.protocolversion}}</td>
+      <td>{{report.hardwareversion}}</td>
+      <td>{{report.softwareversion}}</td>
+      <td>{{report.picresolution}}</td>
+      <td>{{report.picenable}}</td>
+      <td>{{report.piclightenhance}}</td>
+      <td>{{report.highsensitivity}}</td>
+      <td>{{report.beep}}</td>
+      <td>{{report.status}}</td>
+      <td>{{report.powerstatus}}</td>
+      <td>{{report.gprsstatus}}</td>
+
+
+
+
     </tr>
 
     </tbody>
