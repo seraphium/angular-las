@@ -23,7 +23,7 @@
     <thead class="thead-inverse">
     <tr>
       <th>Time</th>
-      <th>Unit Name</th>
+      <th [hidden]="selectedUnit.type == 2">Unit Name</th>
       <th>Distance1</th>
       <th>Distance2</th>
       <th>Distance3</th>
@@ -36,7 +36,7 @@
     <tbody>
     <tr *ngFor="let report of reports">
       <td>{{report.time}}</td>
-      <td>{{report.unit_id}}</td>
+      <td [hidden]="selectedUnit.type == 2">{{report.unit_id}}</td>
       <td>{{report.distance1current}}/{{report.distance1quota}}</td>
       <td>{{report.distance2current}}/{{report.distance2quota}}</td>
       <td>{{report.distance3current}}/{{report.distance3quota}}</td>
@@ -52,7 +52,7 @@
     <thead class="thead-inverse">
     <tr>
       <th>Time</th>
-      <th>Unit Name</th>
+      <th [hidden]="selectedUnit.type == 2">Unit Name</th>
       <th>Temperature</th>
       <th>CSQ</th>
       <th>Mode</th>
@@ -74,7 +74,7 @@
     <tbody>
     <tr *ngFor="let report of devicereports">
       <td>{{report.time}}</td>
-      <td>{{report.unit_id}}</td>
+      <td  [hidden]="selectedUnit.type != 2">{{report.unit_id}}</td>
       <td>{{report.temperature}}</td>
       <td>{{report.csq}}</td>
       <td>{{report.mode}}</td>

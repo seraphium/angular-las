@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ReportListConfig, TagsService, UserService } from '../shared';
+import {UnitService} from "../shared/services/units.service";
+import {Unit} from "../shared/models/unit.model";
 
 
 @Component({
@@ -17,11 +19,14 @@ export class HomeComponent implements OnInit{
     private router: Router,
     private tagsService: TagsService,
     private userService: UserService,
+    private unitService: UnitService
   ) {}
 
   isAuthenticated: boolean;
   listConfig: ReportListConfig = new ReportListConfig();
   tags: Array<string> = [];
+
+  selectedUnit: Unit = new Unit();
 
   ngOnInit() {
     this.userService.isAuthenticated.subscribe(
@@ -33,8 +38,12 @@ export class HomeComponent implements OnInit{
         }
       });
 
+    this.unitService.selectedUnit.subscribe(unit => {
+      this.selectedUnit = unit;
+    })
 
   }
+
 
 
   setListTo(type: string = '', filter: Object = {}) {
