@@ -89,8 +89,11 @@ export class ReportComponent implements OnInit {
   showMedia(report: Report) {
     $('#mediaModal').modal('show');
 
-
   }
 
+  disalarm(report: Report){
+    $('#disalarmModal').modal('show');
+
+  }
 
 }

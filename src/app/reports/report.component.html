@@ -1,5 +1,5 @@
 <div >
-  <!-- Modal -->
+  <!-- Media Modal -->
   <div class="modal fade" id="mediaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="trbue">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -19,6 +19,28 @@
       </div>
     </div>
   </div>
+  <!-- disalarm Modal -->
+  <div class="modal fade" id="disalarmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="trbue">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title" id="disalarmLLabel">Disalarm</h4>
+        </div>
+        <div class="modal-body">
+          [disalarm options here]
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
   <table *ngIf="type === 'report'" class="table table-striped">
     <thead class="thead-inverse">
     <tr>
@@ -30,19 +52,22 @@
       <th>IsAlert</th>
       <th>HasMedia</th>
       <th>Message</th>
+      <th>AckMethod</th>
       <th>Weather</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let report of reports">
       <td>{{report.time}}</td>
-      <td [hidden]="selectedUnit.type == 2">{{report.unit_id}}</td>
+      <td [hidden]="selectedUnit.type == 2">{{report.unit_name}}</td>
       <td>{{report.distance1current}}/{{report.distance1quota}}</td>
       <td>{{report.distance2current}}/{{report.distance2quota}}</td>
       <td>{{report.distance3current}}/{{report.distance3quota}}</td>
       <td>{{report.isalert}}</td>
       <td><button class="btn btn-outline-success" *ngIf="report.hasmedia === true" (click)="showMedia(report)">Show</button></td>
       <td>{{report.message}}</td>
+      <td><button class="btn btn-outline-info" *ngIf="report.ackmethod === undefined" (click)="disalarm(report)">Disalarm</button>
+        <p *ngIf="report.ackmethod != undefined">{{report.ackmethod}}</p></td>
       <td>{{report.weather}}</td>
     </tr>
 
@@ -74,7 +99,7 @@
     <tbody>
     <tr *ngFor="let report of devicereports">
       <td>{{report.time}}</td>
-      <td  [hidden]="selectedUnit.type != 2">{{report.unit_id}}</td>
+      <td  [hidden]="selectedUnit.type != 2">{{report.unit_name}}</td>
       <td>{{report.temperature}}</td>
       <td>{{report.csq}}</td>
       <td>{{report.mode}}</td>

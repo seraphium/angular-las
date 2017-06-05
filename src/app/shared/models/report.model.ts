@@ -5,6 +5,7 @@
 export class BaseReport {
   id: number;
   unit_id : number;
+  unit_name: string;
   time :string;
 }
 
@@ -18,6 +19,7 @@ export class Report extends BaseReport {
   distance3quota : number;
   message : string;
   isalert : boolean;
+  ackmethod: number;
   ackdetail : string;
   mediaguid : string;
   hasmedia : boolean;
