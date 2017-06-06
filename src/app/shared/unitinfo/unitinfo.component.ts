@@ -49,7 +49,8 @@ export class UnitinfoComponent implements OnInit {
  getPhoto(unit: Unit){
       console.log(unit.id + " get photo");
     let sms = new Sms();
-    sms.time = new Date().toLocaleString();
+    this.isSubmitting = true;
+    sms.time = new Date().toISOString();
     sms.sender = '13800000000';
     sms.direction = 0;
     sms.receiver = unit.phonenum;
@@ -59,6 +60,7 @@ export class UnitinfoComponent implements OnInit {
     sms.checksumcorrect = true;
     this.smsService.save(sms).subscribe(sms => {
       console.log(sms);
+      this.isSubmitting = false;
       alert("sms sent succeed");
     })
  }

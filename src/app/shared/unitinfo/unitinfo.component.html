@@ -27,7 +27,8 @@
       </div>
       <div class="col-md-3">
         <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-secondary" (click)="getPhoto(selectedUnit)">Get Photo</button>
+          <button type="button" class="btn btn-secondary"
+                  [disabled]="isSubmitting" (click)="getPhoto(selectedUnit)">Get Photo</button>
         </div>
       </div>
     </div>
