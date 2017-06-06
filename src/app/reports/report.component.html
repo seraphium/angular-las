@@ -74,6 +74,20 @@
 
     </tbody>
   </table>
+    <nav [hidden]="totalPagesReport <= 1">
+      <ul class="pagination">
+
+        <li class="page-item"
+            [ngClass]="{'active': pageNumber === currentPageReport}"
+            *ngFor="let pageNumber of totalPagesReport"
+            (click)="setPageToReport(pageNumber)">
+
+          <a class="page-link" href="#">{{ pageNumber }}</a>
+
+        </li>
+
+      </ul>
+    </nav>
   </div>
   <div *ngIf="type === 'devicereport'">
   <table  class="table table-striped">
@@ -127,7 +141,20 @@
 
     </tbody>
   </table>
+    <nav [hidden]="totalPagesDeviceReport <= 1">
+      <ul class="pagination">
 
+        <li class="page-item"
+            [ngClass]="{'active': pageNumber === currentPageDeviceReport}"
+            *ngFor="let pageNumber of totalPagesDeviceReport"
+            (click)="setPageToDeviceReport(pageNumber)">
+
+          <a class="page-link" href="#">{{ pageNumber }}</a>
+
+        </li>
+
+      </ul>
+    </nav>
 
 
   </div>

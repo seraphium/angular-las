@@ -32,6 +32,12 @@ export class ReportComponent implements OnInit {
   isReportLoading = false;
   isDeviceReportLoading = false;
 
+  currentPageReport: number = 1;
+  totalPagesReport: Array<number> = [1];
+
+  currentPageDeviceReport: number = 1;
+  totalPagesDeviceReport: Array<number> = [1];
+
   private _type: string;
   @Input() set type(newtype: string){
     if (this._type != newtype){
@@ -39,6 +45,8 @@ export class ReportComponent implements OnInit {
       console.log("type set to " + this._type);
     }
   }
+
+  @Input() limit: number = 1;
 
   get type(): string {
     return this._type;
@@ -67,34 +75,67 @@ export class ReportComponent implements OnInit {
     this.unitService.selectedUnit.subscribe(unit => {
       this.selectedUnit = unit;
       console.log("report selected unit:" + unit.id);
-      let queryConfig = new ReportListConfig();
-      queryConfig.filters.unit_id = unit.id;
-      this.isReportLoading = true;
-      this.reportService.query(queryConfig).subscribe(reports => {
-        if (isUndefined(reports)){
-          this.reports = new Array<Report>();
-          this.isReportLoading = false;
-        } else {
-          this.reports = reports.report;
-          this.isReportLoading = false;
-        }
-      });
+
+      this.queryReports();
+
+      this.queryDeviceReports();
 
 
-      queryConfig.type = 'devicereports';
-      queryConfig.filters.unit_id = unit.id;
-      this.isDeviceReportLoading = true;
-      this.reportService.querydevicereports(queryConfig).subscribe(devicereports => {
-        if (isUndefined(devicereports)){
-          this.devicereports = new Array<DeviceReport>();
-          this.isDeviceReportLoading = false;
-
-        } else {
-          this.isDeviceReportLoading = false;
-        }
-      })
     })
 
+  }
+
+  queryReports(){
+    let queryConfig = new ReportListConfig();
+    queryConfig.type = 'reports';
+    queryConfig.filters.limit = this.limit;
+    queryConfig.filters.offset = this.limit * (this.currentPageReport - 1);
+
+    queryConfig.filters.unit_id = this.selectedUnit.id;
+    this.isReportLoading = true;
+    this.reportService.query(queryConfig).subscribe(reports => {
+      if (isUndefined(reports)){
+        this.reports = new Array<Report>();
+        this.isReportLoading = false;
+      } else {
+        this.reports = reports.report;
+        this.isReportLoading = false;
+        this.totalPagesReport = Array.from(new Array(Math.ceil(reports.reportCount / this.limit)),(val,index)=>index+1);
+
+      }
+    });
+  }
+
+  queryDeviceReports(){
+    let queryConfig = new ReportListConfig();
+    queryConfig.filters.limit = this.limit;
+    queryConfig.filters.offset = this.limit * (this.currentPageDeviceReport - 1);
+    queryConfig.type = 'devicereports';
+    queryConfig.filters.unit_id = this.selectedUnit.id;
+    this.isDeviceReportLoading = true;
+    this.reportService.querydevicereports(queryConfig).subscribe(reports => {
+      if (isUndefined(reports)){
+        this.devicereports = new Array<DeviceReport>();
+        this.isDeviceReportLoading = false;
+
+      } else {
+        this.isDeviceReportLoading = false;
+        this.devicereports = reports.devicereport;
+        this.totalPagesDeviceReport = Array.from(new Array(Math.ceil(reports.deviceReportsCount / this.limit)),(val,index)=>index+1);
+
+
+      }
+    })
+  }
+
+  setPageToReport(pageNumber) {
+    this.currentPageReport = pageNumber;
+    this.queryReports();
+  }
+
+  setPageToDeviceReport(pageNumber) {
+    this.currentPageDeviceReport = pageNumber;
+    this.queryDeviceReports();
   }
 
   showMedia(report: Report) {

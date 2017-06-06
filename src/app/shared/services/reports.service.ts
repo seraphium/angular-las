@@ -15,7 +15,7 @@ export class ReportService  {
     private apiService: ApiService
   ){}
 
-  query(config: ReportListConfig): Observable<{report: Report[], unitsCount: number}>  {
+  query(config: ReportListConfig): Observable<{report: Report[], reportCount: number}>  {
       let params: URLSearchParams =  new URLSearchParams();
       Object.keys(config.filters).forEach(
         (key) => {
@@ -28,7 +28,7 @@ export class ReportService  {
 
   }
 
-  querydevicereports(config: ReportListConfig): Observable<{devicereport: DeviceReport[], unitsCount: number}>  {
+  querydevicereports(config: ReportListConfig): Observable<{devicereport: DeviceReport[], deviceReportsCount: number}>  {
     let params: URLSearchParams =  new URLSearchParams();
     Object.keys(config.filters).forEach(
       (key) => {
