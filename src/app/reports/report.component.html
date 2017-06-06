@@ -41,7 +41,8 @@
       </div>
     </div>
   </div>
-  <table *ngIf="type === 'report'" class="table table-striped">
+  <div *ngIf="type === 'report'">
+  <table class="table table-striped">
     <thead class="thead-inverse">
     <tr>
       <th>Time</th>
@@ -73,7 +74,9 @@
 
     </tbody>
   </table>
-  <table *ngIf="type === 'devicereport'" class="table table-striped">
+  </div>
+  <div *ngIf="type === 'devicereport'">
+  <table  class="table table-striped">
     <thead class="thead-inverse">
     <tr>
       <th>Time</th>
@@ -126,4 +129,6 @@
   </table>
 
 
+
+  </div>
 </div>

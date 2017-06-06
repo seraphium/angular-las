@@ -29,6 +29,9 @@ export class ReportComponent implements OnInit {
   isSubmitting = false;
   isDeleting = false;
   selectedUnit: Unit;
+  isReportLoading = false;
+  isDeviceReportLoading = false;
+
   private _type: string;
   @Input() set type(newtype: string){
     if (this._type != newtype){
@@ -66,20 +69,28 @@ export class ReportComponent implements OnInit {
       console.log("report selected unit:" + unit.id);
       let queryConfig = new ReportListConfig();
       queryConfig.filters.unit_id = unit.id;
+      this.isReportLoading = true;
       this.reportService.query(queryConfig).subscribe(reports => {
         if (isUndefined(reports)){
           this.reports = new Array<Report>();
+          this.isReportLoading = false;
         } else {
           this.reports = reports.report;
+          this.isReportLoading = false;
         }
-      })
+      });
+
+
       queryConfig.type = 'devicereports';
       queryConfig.filters.unit_id = unit.id;
+      this.isDeviceReportLoading = true;
       this.reportService.querydevicereports(queryConfig).subscribe(devicereports => {
         if (isUndefined(devicereports)){
           this.devicereports = new Array<DeviceReport>();
+          this.isDeviceReportLoading = false;
+
         } else {
-          this.devicereports = devicereports.devicereport;
+          this.isDeviceReportLoading = false;
         }
       })
     })

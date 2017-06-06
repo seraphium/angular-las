@@ -9,6 +9,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {UnitService} from "../services/units.service";
 import {UserService} from "../services/user.service";
 import {isUndefined} from "util";
+import {Sms} from "../models/sms.model";
+import {SmsService} from "../services/sms.service";
 
 
 @Component({
@@ -26,7 +28,8 @@ export class UnitinfoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private unitService:  UnitService,
-    private userService: UserService
+    private userService: UserService,
+    private smsService: SmsService
   ){
 
   }
@@ -45,6 +48,19 @@ export class UnitinfoComponent implements OnInit {
 
  getPhoto(unit: Unit){
       console.log(unit.id + " get photo");
+    let sms = new Sms();
+    sms.time = new Date().toLocaleString();
+    sms.sender = '13800000000';
+    sms.direction = 0;
+    sms.receiver = unit.phonenum;
+    sms.state = 0; //pending
+    sms.content = "##HR1";
+    sms.device_id = unit.id;
+    sms.checksumcorrect = true;
+    this.smsService.save(sms).subscribe(sms => {
+      console.log(sms);
+      alert("sms sent succeed");
+    })
  }
 
 
