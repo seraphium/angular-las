@@ -68,13 +68,13 @@ export class ReportService  {
   save(report): Observable<Report>  {
       //if we're updating an existing article
       if (report.id) {
-        return this.apiService.post('/report/'+ report.id + '/', {report: report})
+        return this.apiService.post(`/report/${report.id}/`, {report: report})
           .map(data => {
             console.log('update report:' + data);
             return data;
           });
       } else {
-        return this.apiService.post('/report/' + report.id + '/', {report: report})
+        return this.apiService.post(`/report/${report.id}/`, {report: report})
           .map(data => data);
       }
   }
