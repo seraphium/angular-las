@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  api_url: 'http://angular-las.herokuapp.com/api'
+  api_url: 'http://angular-las.herokuapp.com/api',
+
 };

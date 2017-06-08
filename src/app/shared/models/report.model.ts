@@ -20,7 +20,9 @@ export class Report extends BaseReport {
   message : string;
   isalert : boolean;
   ackmethod: number;
+  ackoperator_id: number;
   ackdetail : string;
+  acktime: string;
   mediaguid : string;
   hasmedia : boolean;
   statusid : number;

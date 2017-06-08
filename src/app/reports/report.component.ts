@@ -10,7 +10,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ReportService} from "../shared/services/reports.service";
 import {UserService} from "../shared/services/user.service";
 import {FormControl} from "@angular/forms";
-import {isUndefined} from "util";
+import {error, isUndefined} from "util";
 import {ReportListConfig} from "../shared/models/report-list-config.model";
 import {UnitbarComponent} from "../shared/unitbar/unitbar.component";
 import {UnitService} from "../shared/services/units.service";
@@ -22,13 +22,14 @@ declare var $:any;
   templateUrl: './report.component.html'
 })
 export class ReportComponent implements OnInit {
-  reports: Array<Report>;
-  devicereports: Array<DeviceReport>;
+  reports: Array<Report> = new Array<Report>();
+  devicereports: Array<DeviceReport> = new Array<DeviceReport>();
   currentUser: User;
   canModify: boolean;
   isSubmitting = false;
   isDeleting = false;
   selectedUnit: Unit;
+  selectedReport: Report;
   isReportLoading = false;
   isDeviceReportLoading = false;
 
@@ -46,7 +47,7 @@ export class ReportComponent implements OnInit {
     }
   }
 
-  @Input() limit: number = 1;
+  @Input() limit: number = 10;
 
   get type(): string {
     return this._type;
@@ -75,17 +76,21 @@ export class ReportComponent implements OnInit {
     this.unitService.selectedUnit.subscribe(unit => {
       this.selectedUnit = unit;
       console.log("report selected unit:" + unit.id);
-
+      if (isUndefined(this.selectedUnit)) {
+        return;
+      }
       this.queryReports();
 
       this.queryDeviceReports();
-
 
     })
 
   }
 
   queryReports(){
+    if (isUndefined(this.selectedUnit.id )){
+      return;
+    }
     let queryConfig = new ReportListConfig();
     queryConfig.type = 'reports';
     queryConfig.filters.limit = this.limit;
@@ -107,6 +112,9 @@ export class ReportComponent implements OnInit {
   }
 
   queryDeviceReports(){
+    if (isUndefined(this.selectedUnit.id )){
+      return;
+    }
     let queryConfig = new ReportListConfig();
     queryConfig.filters.limit = this.limit;
     queryConfig.filters.offset = this.limit * (this.currentPageDeviceReport - 1);
@@ -144,8 +152,22 @@ export class ReportComponent implements OnInit {
   }
 
   disalarm(report: Report){
+    this.selectedReport = report;
     $('#disalarmModal').modal('show');
 
+  }
+
+  disalarmConfirm() {
+    this.selectedReport.ackmethod = 1;
+    this.selectedReport.ackdetail = "detail";
+    this.selectedReport.acktime = new Date().toISOString();
+    this.selectedReport.ackoperator_id = this.currentUser.id;
+    this.reportService.save(this.selectedReport).subscribe(data => {
+      console.log(data);
+    },
+    error => {
+      console.log(error);
+    })
   }
 
 }

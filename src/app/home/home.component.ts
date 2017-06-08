@@ -35,6 +35,8 @@ export class HomeComponent implements OnInit{
 
         if (authenticated) {
           this.setListTo('report');
+        } else {
+          this.router.navigateByUrl('/login');
         }
       });
 
