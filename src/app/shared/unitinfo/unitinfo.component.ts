@@ -2,7 +2,7 @@
  * Created by zezhang on 2017/5/9.
  */
 
-import {Component, OnInit} from "@angular/core";
+import {Component, Input, OnInit, ViewChild} from "@angular/core";
 import {Unit} from "../models/unit.model";
 import {User} from "../models/user.model";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -11,6 +11,7 @@ import {UserService} from "../services/user.service";
 import {isUndefined} from "util";
 import {Sms} from "../models/sms.model";
 import {SmsService} from "../services/sms.service";
+import {ShowDialogComponent} from "../dialogs/dialog.component";
 
 
 @Component({
@@ -23,6 +24,9 @@ export class UnitinfoComponent implements OnInit {
   canModify: boolean;
   isSubmitting = false;
   isDeleting = false;
+
+  @ViewChild(ShowDialogComponent)
+  public readonly _modal: ShowDialogComponent;
 
   constructor(
     private route: ActivatedRoute,
@@ -66,7 +70,7 @@ export class UnitinfoComponent implements OnInit {
   }
 
   updateUnit(unit: Unit) {
-
+    this._modal.show();
   }
 
 

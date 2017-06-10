@@ -2,13 +2,14 @@
  * Created by zezhang on 2017/5/9.
  */
 
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {Unit} from "../models/unit.model";
 import {User} from "../models/user.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UnitService} from "../services/units.service";
 import {UserService} from "../services/user.service";
 import {isUndefined} from "util";
+import {ShowDialogComponent} from "../dialogs/dialog.component";
 
 
 @Component({
@@ -21,6 +22,10 @@ export class UnitbarComponent implements OnInit {
   canModify: boolean;
   isSubmitting = false;
   isDeleting = false;
+
+  @ViewChild(ShowDialogComponent)
+  public readonly _modal: ShowDialogComponent;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -63,15 +68,17 @@ export class UnitbarComponent implements OnInit {
 
   addLine(unit: Unit) {
     console.log('add line from city:' + unit.name)
+    this._modal.show();
   }
 
   addUnit(unit: Unit){
     console.log('add unit from line:' + unit.name)
-
+    this._modal.show();
   }
 
   addCity(){
-      console.log('add city');
+    console.log('add city');
+    this._modal.show();
   }
  /* onToggleFavorite(favorited: boolean) {
     this.article.favorited = favorited;

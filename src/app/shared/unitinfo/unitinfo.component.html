@@ -1,4 +1,17 @@
 <div>
+  <show-dialog #modifydlg>
+    <div class="dlg-header">
+      Modify Unit
+    </div>
+    <div class="dlg-body">
+      [modify unit]
+      <input type="text">
+    </div>
+    <div class="dlg-footer">
+      <button type="button" class="btn btn-default" (click)="modifydlg.hide()">Close</button>
+      <button type="button" class="btn btn-primary" (click)="modifydlg.hide()">Save changes</button>
+    </div>
+  </show-dialog>
   <p>Unit Info</p>
   <div class="container">
     <div class="row">

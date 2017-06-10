@@ -1,4 +1,20 @@
 <div class="sidebar">
+  <show-dialog #addunitdlg>
+    <div class="dlg-header">
+      Add Unit
+    </div>
+    <div class="dlg-body">
+      [Add unit]
+      <input type="text">
+      <input type="text">
+      <input type="text">
+    </div>
+    <div class="dlg-footer">
+      <button type="button" class="btn btn-danger" (click)="addunitdlg.hide()">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="addunitdlg.hide()">Save changes</button>
+    </div>
+  </show-dialog>
+
   <p>Unit List</p><button type="button" class="btn btn-sm btn-outline-info" (click)="addCity()">+</button>
 
   <div class="list-group">
