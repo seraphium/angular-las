@@ -4,12 +4,49 @@
       Modify Unit
     </div>
     <div class="dlg-body">
-      [modify unit]
-      <input type="text">
+        <div class="row">
+            <ul class="nav nav-pills outline-active">
+              <li class="nav-item">
+                <a class="nav-link" (click)="setModifyType(0)" href="#"  [ngClass]="{'active': modifyType === 0}">Basic Settings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" (click)="setModifyType(1)" href="#"  [ngClass]="{'active': modifyType === 1}">Alert Settings</a>
+              </li>
+            </ul>
+        </div>
+      <div class="row">
+          <div *ngIf="modifyType === 0">
+            <form [formGroup]="unitBasicForm" >
+              <fieldset [disabled]="isSubmitting" >
+                <fieldset class="form-group">
+                  <input class="form-control form-control-sm" formControlName="towerfrom" type="text" placeholder="from"/></fieldset>
+                <fieldset class="form-group">
+                  <input class="form-control form-control-sm" formControlName="towerto" type="text" placeholder="to"/></fieldset>
+                <fieldset class="form-group">
+                  <input class="form-control form-control-sm" formControlName="idintower" type="text" placeholder="to"/></fieldset>
+              </fieldset>
+            </form>
+          </div>
+            <div  *ngIf="modifyType === 1">
+              <form [formGroup]="unitAlertForm">
+                <fieldset [disabled]="isSubmitting" [hidden]="modifyType != 1">
+                  <fieldset class="form-group">
+                    <input class="form-control form-control-sm" formControlName="distance1" type="text" placeholder="distance1"/></fieldset>
+                  <fieldset class="form-group">
+                    <input class="form-control form-control-sm" formControlName="distance2" type="text" placeholder="distance2"/></fieldset>
+                  <fieldset class="form-group">
+                    <input class="form-control form-control-sm" formControlName="distance3" type="text" placeholder="distance3"/></fieldset>
+                </fieldset>
+              </form>
+            </div>
+        </div>
+      <div class="row">
+        <list-errors [errors]="errors"></list-errors>
+      </div>
     </div>
     <div class="dlg-footer">
       <button type="button" class="btn btn-default" (click)="modifydlg.hide()">Close</button>
-      <button type="button" class="btn btn-primary" (click)="modifydlg.hide()">Save changes</button>
+      <button type="button" class="btn btn-primary" (click)="submitModify()">Save changes</button>
     </div>
   </show-dialog>
   <p>Unit Info</p>
@@ -45,7 +82,7 @@
         </div>
         <div class="row">
           <button type="button" class="btn btn-sm btn-outline-info"
-                  [disabled]="isSubmitting" (click)="updateUnit(selectedUnit)">Modify</button>
+                  [disabled]="isSubmitting" (click)="modifyUnit(selectedUnit)">Modify</button>
         </div>
       </div>
     </div>

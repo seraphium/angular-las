@@ -19,7 +19,6 @@ export class UnitService  {
   public selectedUnitSubject = new BehaviorSubject<Unit>(new Unit());
   public selectedUnit = this.selectedUnitSubject.asObservable().distinctUntilChanged();
 
-
   public unitsSubject = new BehaviorSubject<Unit>(new Unit());
   public units = this.unitsSubject.asObservable().distinctUntilChanged();
 
@@ -54,7 +53,7 @@ export class UnitService  {
   save(unit): Observable<Unit>  {
       //if we're updating an existing article
       if (unit.id) {
-        return this.apiService.put('/units/'+ unit.id, {unit: unit})
+        return this.apiService.post('/units/'+ unit.id, {unit: unit})
           .map(data => data.unit);
       } else {
         return this.apiService.post('/units/', {unit: unit})

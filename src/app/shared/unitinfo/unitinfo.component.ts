@@ -12,6 +12,8 @@ import {isUndefined} from "util";
 import {Sms} from "../models/sms.model";
 import {SmsService} from "../services/sms.service";
 import {ShowDialogComponent} from "../dialogs/dialog.component";
+import {FormGroup} from "@angular/forms/src/model";
+import {FormBuilder} from "@angular/forms";
 
 
 @Component({
@@ -25,6 +27,13 @@ export class UnitinfoComponent implements OnInit {
   isSubmitting = false;
   isDeleting = false;
 
+  unitBasicForm: FormGroup;
+  unitAlertForm: FormGroup;
+
+  errors: Object = {};
+
+  modifyType: number = 0;
+
   @ViewChild(ShowDialogComponent)
   public readonly _modal: ShowDialogComponent;
 
@@ -33,18 +42,36 @@ export class UnitinfoComponent implements OnInit {
     private router: Router,
     private unitService:  UnitService,
     private userService: UserService,
-    private smsService: SmsService
+    private smsService: SmsService,
+    private fb: FormBuilder
+
   ){
 
   }
 
+  setModifyType(type: number){
+      this.modifyType = type;
+  }
 
   ngOnInit()
   {
+    this.unitBasicForm = this.fb.group({
+      towerfrom: '',
+      towerto: '',
+      idintower: ""
+    });
+
+    this.unitAlertForm = this.fb.group({
+      distance1: '',
+      distance2: '',
+      distance3: ""
+    });
+
+
 
     this.unitService.selectedUnit.subscribe(unit => {
       this.selectedUnit = unit;
-
+      this.unitBasicForm.patchValue(unit);
 
     });
 
@@ -69,8 +96,28 @@ export class UnitinfoComponent implements OnInit {
     })
   }
 
-  updateUnit(unit: Unit) {
+  modifyUnit(unit: Unit) {
     this._modal.show();
+  }
+
+  updateUnit(values: Object){
+    (<any>Object).assign(this.selectedUnit, values);
+
+  }
+  submitModify() {
+    this.isSubmitting = true;
+    this.updateUnit(this.unitBasicForm.value);
+
+    this.unitService.save(this.selectedUnit)
+      .subscribe(
+        unit => {
+          this._modal.hide();
+        },
+      err => {
+        this.errors = err;
+        this.isSubmitting = false;
+      });
+
   }
 
 
