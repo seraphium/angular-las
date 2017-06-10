@@ -14,7 +14,7 @@ import {ShowDialogComponent} from "../dialogs/dialog.component";
 
 @Component({
   selector: 'unitbar',
-  templateUrl: './unitbar.component.html'
+  templateUrl: './unitbar.component.html',
 })
 export class UnitbarComponent implements OnInit {
   units: Array<Unit>;

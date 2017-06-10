@@ -2,7 +2,7 @@
  * Created by zezhang on 2017/5/9.
  */
 
-import {Component, Input, OnInit, ViewChild} from "@angular/core";
+import {AfterContentInit, AfterViewInit, Component, Input, OnInit, ViewChild} from "@angular/core";
 import {Report, DeviceReport} from "../shared/models";
 import {User} from "../shared/models/user.model";
 import {Unit} from '../shared/models/unit.model';
@@ -20,7 +20,7 @@ declare var $:any;
   selector: 'reportlist',
   templateUrl: './report.component.html'
 })
-export class ReportComponent implements OnInit {
+export class ReportComponent implements OnInit, AfterViewInit {
   reports: Array<Report> = new Array<Report>();
   devicereports: Array<DeviceReport> = new Array<DeviceReport>();
   currentUser: User;
@@ -87,6 +87,15 @@ export class ReportComponent implements OnInit {
 
     })
 
+  }
+
+  ngAfterViewInit(){
+  /*   $("#reporttable").DataTable( {
+     "scrollX": true
+     } );
+     $("#devicereporttable").DataTable( {
+     "scrollX": true
+     } );*/
   }
 
   queryReports(){

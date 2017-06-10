@@ -15,18 +15,18 @@
     </div>
   </show-dialog>
 
-  <p>Unit List</p><button type="button" class="btn btn-sm btn-outline-info" (click)="addCity()">+</button>
+  <p>Unit List  <a href="#" (click)="addCity()"><i class="glyphicon glyphicon-plus"></i></a></p>
 
   <div class="list-group">
       <div class="list-group-item"  *ngFor="let city of units | unittype: 0">
       <button type="button" class="btn btn-secondary" (click)="unitClicked(city)">{{city.name}}</button>
-        <button type="button" class="btn btn-sm btn-outline-info" (click)="addLine(city)">+</button>
+        <a href="#" (click)="addLine(city)"><i class="glyphicon glyphicon-plus"></i></a>
         <div class="list-group-item" *ngFor="let line of units | unittype: 1 | unitparent: city " >
             <button type="button" class="btn btn-secondary" (click)="unitClicked(line)">{{line.name}}</button>
-          <button type="button" class="btn btn-sm btn-outline-info" (click)="addUnit(line)">+</button>
+          <a href="#"  (click)="addUnit(line)"><i class="glyphicon glyphicon-plus"></i></a>
 
           <div class="list-group-item" *ngFor="let unit of units | unittype: 2 | unitparent: line " >
-            <button type="button" class="btn btn-secondary" (click)="unitClicked(unit)" >{{unit.name}}</button>
+            <button type="button" class="btn btn-secondary"  (click)="unitClicked(unit)" >{{unit.name}}</button>
 
           </div>
           </div>

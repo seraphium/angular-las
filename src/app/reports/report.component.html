@@ -34,8 +34,8 @@
       </div>
     </div>
   </div>
-  <div *ngIf="type === 'report'">
-  <table [hidden]="reports.length <= 0" class="table table-striped">
+  <div *ngIf="type === 'report'" >
+  <table id="reporttable"[hidden]="reports.length <= 0" class="table table-striped">
     <thead class="thead-inverse">
     <tr>
       <th>Time</th>
@@ -58,9 +58,9 @@
       <td>{{report.distance2current}}/{{report.distance2quota}}</td>
       <td>{{report.distance3current}}/{{report.distance3quota}}</td>
       <td>{{report.isalert}}</td>
-      <td><button class="btn btn-outline-success" *ngIf="report.hasmedia === true" (click)="showMedia(report)">Show</button></td>
+      <td><a href="#" *ngIf="report.hasmedia === true" (click)="showMedia(report)">Show</a></td>
       <td>{{report.message}}</td>
-      <td><button class="btn btn-outline-info" *ngIf="report.ackmethod === undefined" (click)="disalarm(report)">Disalarm</button>
+      <td><a class="alert" href="#" *ngIf="report.ackmethod === undefined" (click)="disalarm(report)">Disalarm</a>
         <p *ngIf="report.ackmethod != undefined">{{report.ackmethod}}</p></td>
       <td>{{report.weather}}</td>
     </tr>
@@ -83,7 +83,7 @@
     </nav>
   </div>
   <div *ngIf="type === 'devicereport'">
-  <table [hidden]="devicereports.length <= 0"  class="table table-striped">
+  <table id="devicereporttable" [hidden]="devicereports.length <= 0"  class="table table-striped">
     <thead class="thead-inverse">
     <tr>
       <th>Time</th>

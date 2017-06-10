@@ -60,6 +60,8 @@ blockquote {
 a {
   color: #5CB85C;
   text-decoration: none; }
+
+
 a:focus, a:hover {
   color: #3d8b3d;
   text-decoration: underline; }
@@ -76,6 +78,11 @@ a:not([href]):focus, a:not([href]):hover {
   text-decoration: none; }
 a:not([href]):focus {
   outline: none; }
+
+a.alert {
+  color: brown;
+  text-decoration: none; }
+
 
 pre {
   margin-top: 0;
@@ -5085,3 +5092,9 @@ footer .attribution {
   font-size: 0.6rem;
   margin-right: 5px;
   cursor: pointer; }
+
+
+div.dataTables_wrapper {
+  width: 800px;
+  margin: 0 auto;
+}
