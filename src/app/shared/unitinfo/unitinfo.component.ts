@@ -63,7 +63,11 @@ export class UnitinfoComponent implements OnInit {
       this.isSubmitting = false;
       alert("sms sent succeed");
     })
- }
+  }
+
+  updateUnit(unit: Unit) {
+
+  }
 
 
 }

@@ -61,6 +61,18 @@ export class UnitbarComponent implements OnInit {
       this.unitService.selectedUnitSubject.next(unit);
   }
 
+  addLine(unit: Unit) {
+    console.log('add line from city:' + unit.name)
+  }
+
+  addUnit(unit: Unit){
+    console.log('add unit from line:' + unit.name)
+
+  }
+
+  addCity(){
+      console.log('add city');
+  }
  /* onToggleFavorite(favorited: boolean) {
     this.article.favorited = favorited;
 
