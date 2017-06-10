@@ -11,6 +11,7 @@ import {FavoriteButtonComponent} from "./buttons/favorite-button.component";
 import {ArticleListConfig} from "./models/article-list-config.model";
 import {ArticleListComponent} from "./article-helpers/article-list.component";
 import {ArticlePreviewComponent} from "./article-helpers/article-preview.component";
+import {ShowDialogComponent} from "./dialogs";
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import {ArticlePreviewComponent} from "./article-helpers/article-preview.compone
     FavoriteButtonComponent,
     ArticleListComponent,
     ArticlePreviewComponent,
+    ShowDialogComponent,
   ],
   exports: [
     CommonModule,
@@ -42,6 +44,7 @@ import {ArticlePreviewComponent} from "./article-helpers/article-preview.compone
     FavoriteButtonComponent,
     ArticleListComponent,
     ArticlePreviewComponent,
+    ShowDialogComponent,
   ],
 
 })

@@ -2,18 +2,17 @@
  * Created by zezhang on 2017/5/9.
  */
 
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnInit, ViewChild} from "@angular/core";
 import {Report, DeviceReport} from "../shared/models";
 import {User} from "../shared/models/user.model";
 import {Unit} from '../shared/models/unit.model';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ReportService} from "../shared/services/reports.service";
 import {UserService} from "../shared/services/user.service";
-import {FormControl} from "@angular/forms";
 import {error, isUndefined} from "util";
 import {ReportListConfig} from "../shared/models/report-list-config.model";
-import {UnitbarComponent} from "../shared/unitbar/unitbar.component";
 import {UnitService} from "../shared/services/units.service";
+import {ShowDialogComponent} from "../shared/";
 
 declare var $:any;
 
@@ -48,6 +47,9 @@ export class ReportComponent implements OnInit {
   }
 
   @Input() limit: number = 10;
+
+  @ViewChild(ShowDialogComponent)
+  public readonly _modal: ShowDialogComponent;
 
   get type(): string {
     return this._type;
@@ -147,7 +149,7 @@ export class ReportComponent implements OnInit {
   }
 
   showMedia(report: Report) {
-    $('#mediaModal').modal('show');
+    this._modal.show();
 
   }
 

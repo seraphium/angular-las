@@ -1,24 +1,18 @@
 <div >
-  <!-- Media Modal -->
-  <div class="modal fade" id="mediaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="trbue">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            <span class="sr-only">Close</span>
-          </button>
-          <h4 class="modal-title" id="myModalLabel">Media</h4>
-        </div>
-        <div class="modal-body">
-          [picture showing here]
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
+  <show-dialog #mediadlg>
+    <div class="dlg-header">
+      header
     </div>
-  </div>
+    <div class="dlg-body">
+      Whatever content you like, form fields, anything
+      <input type="text">
+    </div>
+    <div class="dlg-footer">
+      <button type="button" class="btn btn-default" (click)="mediadlg.hide()">Close</button>
+      <button type="button" class="btn btn-default" (click)="mediadlg.show()">Show modal 2</button>
+      <button type="button" class="btn btn-primary">Save changes</button>
+    </div>
+  </show-dialog>
   <!-- disalarm Modal -->
   <div class="modal fade" id="disalarmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="trbue">
     <div class="modal-dialog" role="document">
