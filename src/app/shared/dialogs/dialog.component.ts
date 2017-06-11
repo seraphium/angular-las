@@ -15,7 +15,13 @@ import {UserService} from "../services/user.service";
     .modal {
       background: rgba(0,0,0,0.6);
     }
-  `]
+   .modal-dialog{
+    overflow-y: initial !important
+    }
+  .modal-body{
+    height: 300px;
+    overflow-y: auto;
+  }`]
 })
 export class ShowDialogComponent {
 

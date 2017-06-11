@@ -18,7 +18,8 @@ import {FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'unitinfo',
-  templateUrl: './unitinfo.component.html'
+  templateUrl: './unitinfo.component.html',
+
 })
 export class UnitinfoComponent implements OnInit {
   selectedUnit:Unit;
@@ -58,13 +59,18 @@ export class UnitinfoComponent implements OnInit {
     this.unitBasicForm = this.fb.group({
       towerfrom: '',
       towerto: '',
-      idintower: ""
+      idintower: "",
+      phonenum: "",
+      identity:"",
+      location:""
     });
 
     this.unitAlertForm = this.fb.group({
-      distance1: '',
-      distance2: '',
-      distance3: ""
+      alertdistance1: '',
+      alertdistance2: '',
+      alertdistance3: "",
+      picresolution:"",
+      picenable: false
     });
 
 
@@ -72,7 +78,9 @@ export class UnitinfoComponent implements OnInit {
     this.unitService.selectedUnit.subscribe(unit => {
       this.selectedUnit = unit;
       this.unitBasicForm.patchValue(unit);
-
+      if (unit.alertsettings != undefined) {
+        this.unitAlertForm.patchValue(unit.alertsettings)
+      }
     });
 
   }
@@ -104,14 +112,14 @@ export class UnitinfoComponent implements OnInit {
     this._modal.show();
   }
 
-  updateUnit(values: Object){
-    (<any>Object).assign(this.selectedUnit, values);
+  updateUnit(target: Object, values: Object){
+    (<any>Object).assign(target, values);
 
   }
   submitModify() {
     this.isSubmitting = true;
-    this.updateUnit(this.unitBasicForm.value);
-
+    this.updateUnit(this.selectedUnit, this.unitBasicForm.value);
+    this.updateUnit(this.selectedUnit.alertsettings, this.unitAlertForm.value);
     this.unitService.save(this.selectedUnit)
       .subscribe(
         unit => {

@@ -36,6 +36,8 @@ export class Unit {
   backupcarrier : number;
   vendor : number;
   remark : string;
+  alertsettings: UnitAlertSettings;
+  networksettings: UnitNetworkSettings;
 
 }
 
