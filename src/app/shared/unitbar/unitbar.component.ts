@@ -10,7 +10,8 @@ import {UnitService} from "../services/units.service";
 import {UserService} from "../services/user.service";
 import {isUndefined} from "util";
 import {ShowDialogComponent} from "../dialogs/dialog.component";
-
+import {TreeComponent} from 'angular-tree-component';
+declare var $:any;
 
 @Component({
   selector: 'unitbar',
@@ -18,6 +19,7 @@ import {ShowDialogComponent} from "../dialogs/dialog.component";
 })
 export class UnitbarComponent implements OnInit {
   units: Array<Unit>;
+  unitroots: Array<Unit>;
   currentUser: User;
   canModify: boolean;
   isSubmitting = false;
@@ -26,6 +28,8 @@ export class UnitbarComponent implements OnInit {
   @ViewChild(ShowDialogComponent)
   public readonly _modal: ShowDialogComponent;
 
+  @ViewChild(TreeComponent)
+  public readonly _tree: TreeComponent;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,8 +38,20 @@ export class UnitbarComponent implements OnInit {
     private userService: UserService
   ){
 
+
   }
 
+  getChildren(unit:Unit) : Array<Unit> {
+     return this.units.filter(u => {
+        return u.parent === unit.id;
+      });
+  }
+
+  buildUnitTree(){
+      for (let unit of this.units){
+        unit.children = this.getChildren(unit)
+      }
+  }
 
   ngOnInit()
   {
@@ -52,6 +68,8 @@ export class UnitbarComponent implements OnInit {
         this.units = new Array<Unit>();
       } else {
         this.units = units.units;
+        this.buildUnitTree();
+        this.unitroots = this.units.filter( u=> u.type === 0);
         if (this.units.length > 0) {
           this.unitService.selectedUnitSubject.next(this.units[0]);
 
@@ -66,11 +84,6 @@ export class UnitbarComponent implements OnInit {
       this.unitService.selectedUnitSubject.next(unit);
   }
 
-  addLine(unit: Unit) {
-    console.log('add line from city:' + unit.name)
-    this._modal.show();
-  }
-
   addUnit(unit: Unit){
     console.log('add unit from line:' + unit.name)
     this._modal.show();
@@ -79,6 +92,15 @@ export class UnitbarComponent implements OnInit {
   addCity(){
     console.log('add city');
     this._modal.show();
+  }
+
+  searchChange(searchText){
+    console.log("Search:" + searchText);
+    this._tree.treeModel.filterNodes((node) => {
+       let hide = (node.data.name.includes(searchText));
+       return hide;
+    }
+    );
   }
  /* onToggleFavorite(favorited: boolean) {
     this.article.favorited = favorited;

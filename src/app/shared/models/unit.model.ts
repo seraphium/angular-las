@@ -6,6 +6,7 @@ import { User } from './user.model';
 export class Unit {
   id: number;
   parent : number;
+  children : Array<Unit>;
   owner :number;
   unittypes : number;
   type : number;

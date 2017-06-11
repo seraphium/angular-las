@@ -93,6 +93,10 @@ export class UnitinfoComponent implements OnInit {
       console.log(sms);
       this.isSubmitting = false;
       alert("sms sent succeed");
+    },
+    error => {
+      this.isSubmitting = false;
+      alert(JSON.stringify(error.errors));
     })
   }
 
@@ -112,6 +116,7 @@ export class UnitinfoComponent implements OnInit {
       .subscribe(
         unit => {
           this._modal.hide();
+          this.isSubmitting = false;
         },
       err => {
         this.errors = err;

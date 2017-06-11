@@ -12,6 +12,7 @@ import {ArticleListConfig} from "./models/article-list-config.model";
 import {ArticleListComponent} from "./article-helpers/article-list.component";
 import {ArticlePreviewComponent} from "./article-helpers/article-preview.component";
 import {ShowDialogComponent} from "./dialogs";
+import { TreeModule } from 'angular-tree-component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import {ShowDialogComponent} from "./dialogs";
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    RouterModule
+    RouterModule,
+    TreeModule
   ],
   declarations: [
     ListErrorsComponent,
@@ -45,6 +47,7 @@ import {ShowDialogComponent} from "./dialogs";
     ArticleListComponent,
     ArticlePreviewComponent,
     ShowDialogComponent,
+    TreeModule
   ],
 
 })

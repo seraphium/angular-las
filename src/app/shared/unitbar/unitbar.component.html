@@ -16,8 +16,20 @@
   </show-dialog>
 
   <p>Unit List  <a href="#" (click)="addCity()"><i class="glyphicon glyphicon-plus"></i></a></p>
-
-  <div class="list-group">
+  <form class="form-inline">
+    <div class="form-group">
+      <label for="nameInput">Name</label>
+      <input type="text" class="form-control" id="nameInput" placeholder="Unit Name" (input)="searchChange($event.target.value)">
+    </div>
+  </form>
+  <tree-root [nodes]="unitroots" #treeroot>
+    <ng-template #loadingTemplate>Loading....</ng-template>
+    <ng-template #treeNodeTemplate let-node let-index="index">
+      <span (click)="unitClicked(node.data)">{{ node.data.name }}</span>
+      <a href="#" *ngIf="node.data.type != 2" (click)="addUnit(node.data)"><i class="glyphicon glyphicon-plus"></i></a>
+    </ng-template>
+  </tree-root>
+ <!-- <div class="list-group">
       <div class="list-group-item"  *ngFor="let city of units | unittype: 0">
       <button type="button" class="btn btn-secondary" (click)="unitClicked(city)">{{city.name}}</button>
         <a href="#" (click)="addLine(city)"><i class="glyphicon glyphicon-plus"></i></a>
@@ -33,5 +45,6 @@
 
 
     </div>
-  </div>
+
+  </div>-->
 </div>
