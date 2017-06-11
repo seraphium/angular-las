@@ -19,7 +19,7 @@
   <form class="form-inline">
     <div class="form-group">
       <label for="nameInput">Name</label>
-      <input type="text" class="form-control" id="nameInput" placeholder="Unit Name" (input)="searchChange($event.target.value)">
+      <input type="text" class="form-control" id="nameInput" placeholder="Unit name or phone" (input)="searchChange($event.target.value)">
     </div>
   </form>
   <tree-root [nodes]="unitroots" #treeroot>

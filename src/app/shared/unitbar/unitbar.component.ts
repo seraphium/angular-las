@@ -97,61 +97,12 @@ export class UnitbarComponent implements OnInit {
   searchChange(searchText){
     console.log("Search:" + searchText);
     this._tree.treeModel.filterNodes((node) => {
-       let hide = (node.data.name.includes(searchText));
-       return hide;
+       let unit = node.data;
+       let show = (unit.name.includes(searchText)) || (unit.phonenum.includes(searchText));
+       return show;
     }
     );
   }
- /* onToggleFavorite(favorited: boolean) {
-    this.article.favorited = favorited;
 
-    if (favorited) {
-      this.article.favoritesCount++;
-    } else {
-      this.article.favoritesCount--;
-    }
-  }
-
-
-  populateComments() {
-      this.commentsService.getAll(this.article.slug)
-        .subscribe(comments => {
-          if (isUndefined(comments)){
-            this.comments = new Array<Comment>();
-          }  else {
-            this.comments = comments;
-          }
-        });
-
-  }
-
-  addComment() {
-      this.isSubmitting = true;
-      this.commentFormErrors = {};
-
-      let commentBody = this.commentControl.value;
-      this.commentsService
-        .add(this.article.slug, commentBody)
-        .subscribe(
-          comment => {
-            this.comments.unshift(comment);
-            this.commentControl.reset('');
-            this.isSubmitting = false;
-          },
-          errors => {
-            this.isSubmitting = false;
-            this.commentFormErrors = errors;
-          }
-        )
-  }
-
-  onDeleteComment(comment){
-      this.commentsService.destroy(comment.id, this.article.slug)
-        .subscribe(
-          success => {
-            this.comments = this.comments.filter((item) => item !== comment);
-          }
-        )
-  }*/
 
 }
