@@ -9,7 +9,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {UnitService} from "../services/units.service";
 import {UserService} from "../services/user.service";
 import {isUndefined} from "util";
-import {ShowDialogComponent} from "../dialogs/dialog.component";
+import {DialogComponent} from "../dialogs/dialog.component";
 import {TreeComponent} from 'angular-tree-component';
 declare var $:any;
 
@@ -25,8 +25,8 @@ export class UnitbarComponent implements OnInit {
   isSubmitting = false;
   isDeleting = false;
 
-  @ViewChild(ShowDialogComponent)
-  public readonly _modal: ShowDialogComponent;
+  @ViewChild(DialogComponent)
+  public readonly _modal: DialogComponent;
 
   @ViewChild(TreeComponent)
   public readonly _tree: TreeComponent;

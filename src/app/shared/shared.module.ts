@@ -11,8 +11,9 @@ import {FavoriteButtonComponent} from "./buttons/favorite-button.component";
 import {ArticleListConfig} from "./models/article-list-config.model";
 import {ArticleListComponent} from "./article-helpers/article-list.component";
 import {ArticlePreviewComponent} from "./article-helpers/article-preview.component";
-import {ShowDialogComponent} from "./dialogs";
+import {DialogComponent} from "./dialogs";
 import { TreeModule } from 'angular-tree-component';
+import {UnitEditDialogComponent} from "./dialogs/uniteditdialog.component";
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { TreeModule } from 'angular-tree-component';
     FavoriteButtonComponent,
     ArticleListComponent,
     ArticlePreviewComponent,
-    ShowDialogComponent,
+    DialogComponent,
+    UnitEditDialogComponent
   ],
   exports: [
     CommonModule,
@@ -39,6 +41,7 @@ import { TreeModule } from 'angular-tree-component';
     ReactiveFormsModule,
     HttpModule,
     RouterModule,
+    TreeModule,
     ListErrorsComponent,
     ShowAuthedDirective,
     FollowButtonComponent,
@@ -46,8 +49,8 @@ import { TreeModule } from 'angular-tree-component';
     FavoriteButtonComponent,
     ArticleListComponent,
     ArticlePreviewComponent,
-    ShowDialogComponent,
-    TreeModule
+    DialogComponent,
+    UnitEditDialogComponent
   ],
 
 })

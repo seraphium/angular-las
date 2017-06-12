@@ -9,7 +9,7 @@ import {UserService} from "../services/user.service";
 
 
 @Component({
-  selector: 'show-dialog',
+  selector: 'dialog',
   templateUrl:  './dialog.component.html',
   styles: [`
     .modal {
@@ -23,9 +23,11 @@ import {UserService} from "../services/user.service";
     overflow-y: auto;
   }`]
 })
-export class ShowDialogComponent {
+export class DialogComponent {
 
   constructor() {}
+
+  errors: Object = {};
 
   public visible = false;
   public visibleAnimate = false;
@@ -46,48 +48,4 @@ export class ShowDialogComponent {
     }
   }
 
-  //@Input()
-  //profile: Profile;
-
-  //@Output()
- // onToggle = new EventEmitter<boolean>();
-
- // isSubmitting = false;
-
-  /*
-  toggleFollowing() {
-    this.isSubmitting = true;
-
-    this.userService.isAuthenticated.subscribe(
-      (authenticated) => {
-        if (!authenticated) {
-          this.router.navigateByUrl('/login');
-          return;
-        }
-
-        if(!this.profile.following) {
-          this.profileService.follow(this.profile.username)
-            .subscribe(
-              data => {
-                this.isSubmitting = false;
-                this.onToggle.emit(true);
-              },
-              err => this.isSubmitting = false
-            );
-        } else {
-
-          this.profileService.unfollow(this.profile.username)
-            .subscribe(
-              data => {
-                this.isSubmitting = false;
-                this.onToggle.emit(false);
-              },
-              err => this.isSubmitting = false
-            );
-
-
-        }
-      }
-    )
-  }*/
 }

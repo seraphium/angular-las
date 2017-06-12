@@ -1,5 +1,5 @@
 <div class="sidebar">
-  <show-dialog #addunitdlg>
+  <dialog #addunitdlg>
     <div class="dlg-header">
       Add Unit
     </div>
@@ -13,7 +13,7 @@
       <button type="button" class="btn btn-danger" (click)="addunitdlg.hide()">Cancel</button>
       <button type="button" class="btn btn-primary" (click)="addunitdlg.hide()">Save changes</button>
     </div>
-  </show-dialog>
+  </dialog>
 
   <p>Unit List  <a href="#" (click)="addCity()"><i class="glyphicon glyphicon-plus"></i></a></p>
   <form class="form-inline">

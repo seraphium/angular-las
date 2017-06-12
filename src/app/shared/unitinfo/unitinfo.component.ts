@@ -11,9 +11,7 @@ import {UserService} from "../services/user.service";
 import {isUndefined} from "util";
 import {Sms} from "../models/sms.model";
 import {SmsService} from "../services/sms.service";
-import {ShowDialogComponent} from "../dialogs/dialog.component";
-import {FormGroup} from "@angular/forms/src/model";
-import {FormBuilder} from "@angular/forms";
+import {UnitEditDialogComponent} from "../dialogs/";
 
 
 @Component({
@@ -24,20 +22,10 @@ import {FormBuilder} from "@angular/forms";
 export class UnitinfoComponent implements OnInit {
   selectedUnit:Unit;
   currentUser: User;
-  canModify: boolean;
-  isSubmitting = false;
-  isDeleting = false;
+  isSubmitting: boolean;
 
-  unitBasicForm: FormGroup;
-  unitAlertForm: FormGroup;
-  unitNetworkForm: FormGroup;
-
-  errors: Object = {};
-
-  modifyType: number = 0;
-
-  @ViewChild(ShowDialogComponent)
-  public readonly _modal: ShowDialogComponent;
+  @ViewChild(UnitEditDialogComponent)
+  public readonly _modal: UnitEditDialogComponent;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,53 +33,22 @@ export class UnitinfoComponent implements OnInit {
     private unitService:  UnitService,
     private userService: UserService,
     private smsService: SmsService,
-    private fb: FormBuilder
 
   ){
 
   }
 
   setModifyType(type: number){
-      this.modifyType = type;
+      this._modal.modifyType = type;
   }
 
   ngOnInit()
   {
-    this.unitBasicForm = this.fb.group({
-      towerfrom: '',
-      towerto: '',
-      idintower: "",
-      phonenum: "",
-      identity:"",
-      location:""
-    });
-
-    this.unitAlertForm = this.fb.group({
-      alertdistance1: '',
-      alertdistance2: '',
-      alertdistance3: "",
-      picresolution:"",
-      picenable: false,
-      piclightenhance: false,
-      beep: false,
-      highsensitivity: false
-    });
-
-    this.unitNetworkForm = this.fb.group({
-      serverip:"",
-      serverport:""
-    });
-
 
     this.unitService.selectedUnit.subscribe(unit => {
       this.selectedUnit = unit;
-      this.unitBasicForm.patchValue(unit);
-      if (unit.alertsettings != undefined) {
-        this.unitAlertForm.patchValue(unit.alertsettings);
-        this.unitNetworkForm.patchValue(unit.networksettings);
-      }
+      this._modal.patchValue(unit);
     });
-
   }
 
  getPhoto(unit: Unit){
@@ -119,28 +76,6 @@ export class UnitinfoComponent implements OnInit {
 
   modifyUnit(unit: Unit) {
     this._modal.show();
-  }
-
-  updateUnit(target: Object, values: Object){
-    (<any>Object).assign(target, values);
-
-  }
-  submitModify() {
-    this.isSubmitting = true;
-    this.updateUnit(this.selectedUnit, this.unitBasicForm.value);
-    this.updateUnit(this.selectedUnit.alertsettings, this.unitAlertForm.value);
-    this.updateUnit(this.selectedUnit.networksettings, this.unitNetworkForm.value);
-    this.unitService.save(this.selectedUnit)
-      .subscribe(
-        unit => {
-          this._modal.hide();
-          this.isSubmitting = false;
-        },
-      err => {
-        this.errors = err;
-        this.isSubmitting = false;
-      });
-
   }
 
 
