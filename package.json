@@ -1,7 +1,7 @@
 {
-  "name": "ang2-conduit",
-  "version": "0.0.0",
-  "license": "MIT",
+  "name": "angular-las",
+  "version": "0.1.0",
+  "license": "Beacon Co,.Ltd",
   "angular-cli": {},
   "scripts": {
     "start": "ng serve --port 4200",
