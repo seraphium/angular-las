@@ -30,6 +30,7 @@ export class UnitinfoComponent implements OnInit {
 
   unitBasicForm: FormGroup;
   unitAlertForm: FormGroup;
+  unitNetworkForm: FormGroup;
 
   errors: Object = {};
 
@@ -70,16 +71,24 @@ export class UnitinfoComponent implements OnInit {
       alertdistance2: '',
       alertdistance3: "",
       picresolution:"",
-      picenable: false
+      picenable: false,
+      piclightenhance: false,
+      beep: false,
+      highsensitivity: false
     });
 
+    this.unitNetworkForm = this.fb.group({
+      serverip:"",
+      serverport:""
+    });
 
 
     this.unitService.selectedUnit.subscribe(unit => {
       this.selectedUnit = unit;
       this.unitBasicForm.patchValue(unit);
       if (unit.alertsettings != undefined) {
-        this.unitAlertForm.patchValue(unit.alertsettings)
+        this.unitAlertForm.patchValue(unit.alertsettings);
+        this.unitNetworkForm.patchValue(unit.networksettings);
       }
     });
 
@@ -120,6 +129,7 @@ export class UnitinfoComponent implements OnInit {
     this.isSubmitting = true;
     this.updateUnit(this.selectedUnit, this.unitBasicForm.value);
     this.updateUnit(this.selectedUnit.alertsettings, this.unitAlertForm.value);
+    this.updateUnit(this.selectedUnit.networksettings, this.unitNetworkForm.value);
     this.unitService.save(this.selectedUnit)
       .subscribe(
         unit => {
