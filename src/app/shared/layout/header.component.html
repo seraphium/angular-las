@@ -1,6 +1,6 @@
+<div class="container">
 <div class="navbar navbar-light">
-  <div class="container">
-    <a class="navbar-brand" routerLink="/">BC3000</a>
+    <a class="navbar-brand" routerLink="/">BC3000 Unit Manager</a>
     <ul class="nav navbar-nav pull-xs-right" *showAuthed="false">
       <li class="nav-item">
         <a class="nav-link"  routerLink="/">Home</a>
@@ -17,19 +17,19 @@
         <a class="nav-link"  routerLink="/" routerLinkActive="Active" [routerLinkActiveOptions]="{exact: true}">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/editor" routerLinkActive="active">
-          <i class="ion-compose"></i>&nbsp;New Article
+        <a class="nav-link" routerLink="/map" routerLinkActive="active">
+          <i class="ion-map"></i>Map
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/settings" routerLinkActive="active">
-          <i class="ion-gear-a"></i>&nbsp;Settings
+          <i class="ion-gear-a"></i>Settings
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/profile', currentUser.username]" routerLinkActive="active">
           <img [src]="currentUser.image" *ngIf="currentUser.image" class="user-pic"/>
-          {{ currentUser.name }}
+          <i class="ion-person"></i>{{ currentUser.name }}
         </a>
       </li>
     </ul>

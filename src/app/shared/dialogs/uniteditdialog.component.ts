@@ -46,6 +46,7 @@ export class UnitEditDialogComponent {
     private fb: FormBuilder,
     private unitService: UnitService
   ){
+
     this.unitBasicForm = this.fb.group({
       towerfrom: '',
       towerto: '',
@@ -71,7 +72,7 @@ export class UnitEditDialogComponent {
       serverport:""
     });
 
-
+    this.modifyType = 0;
   }
 
   patchValue(unit: Unit) {

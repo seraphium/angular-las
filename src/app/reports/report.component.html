@@ -1,39 +1,27 @@
-<div >
-  <dialog #mediadlg>
-    <div class="dlg-header">
-      Show Media
-    </div>
-    <div class="dlg-body">
-      [show media here]
-      <img  src="assets\img\smile.png">
-    </div>
-    <div class="dlg-footer">
-      <button type="button" class="btn btn-default" (click)="mediadlg.hide()">Close</button>
-    </div>
-  </dialog>
+ <div>
+  <modal #mediaModal>
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">I'm a modal!</h4>
+    </modal-header>
+    <modal-body>
+      [show-media here]
+    </modal-body>
+    <modal-footer [show-default-buttons]="true"></modal-footer>
+  </modal>
 
   <!-- disalarm Modal -->
-  <div class="modal fade" id="disalarmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="trbue">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            <span class="sr-only">Close</span>
-          </button>
-          <h4 class="modal-title" id="disalarmLLabel">Disalarm</h4>
-        </div>
-        <div class="modal-body">
+  <modal #dismissModal>
+        <modal-header [show-close]="true">Disalarm</modal-header>
+        <modal-body>
           [disalarm options here]
-        </div>
-        <div class="modal-footer">
+        </modal-body>
+        <modal-footer>
           <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="disalarmConfirm()">OK</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 
-        </div>
-      </div>
-    </div>
-  </div>
+        </modal-footer>
+
+  </modal>
   <div *ngIf="type === 'report'" >
   <table id="reporttable"[hidden]="reports.length <= 0" class="table table-striped">
     <thead class="thead-inverse">

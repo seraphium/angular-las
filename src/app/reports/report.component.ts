@@ -12,6 +12,7 @@ import {UserService} from "../shared/services/user.service";
 import {error, isUndefined} from "util";
 import {ReportListConfig} from "../shared/models/report-list-config.model";
 import {UnitService} from "../shared/services/units.service";
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 
 declare var $:any;
 
@@ -47,8 +48,11 @@ export class ReportComponent implements OnInit, AfterViewInit {
 
   @Input() limit: number = 10;
 
-//  @ViewChild(DialogComponent)
-//  public readonly _modal: DialogComponent;
+  @ViewChild("mediaModal")
+  public readonly _modal: ModalComponent;
+
+  @ViewChild("dismissModal")
+  public readonly _disModal: ModalComponent;
 
   get type(): string {
     return this._type;
@@ -89,12 +93,7 @@ export class ReportComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(){
-  /*   $("#reporttable").DataTable( {
-     "scrollX": true
-     } );
-     $("#devicereporttable").DataTable( {
-     "scrollX": true
-     } );*/
+
   }
 
   queryReports(){
@@ -157,13 +156,13 @@ export class ReportComponent implements OnInit, AfterViewInit {
   }
 
   showMedia(report: Report) {
-   // this._modal.show();
+    this._modal.open();
 
   }
 
   disalarm(report: Report){
     this.selectedReport = report;
-    $('#disalarmModal').modal('show');
+    this._disModal.open();
 
   }
 
