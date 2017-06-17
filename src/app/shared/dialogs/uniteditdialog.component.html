@@ -1,120 +1,125 @@
-<dialog>
-  <div class="dlg-header">
-    Modify Unit
-  </div>
-  <div class="dlg-body">
-    <div class="row">
-      <div class="col-md-3">
-        <ul class="nav nav-pills outline-active">
-          <li class="nav-item">
-            <a class="nav-link" (click)="setModifyType(0)" href="#"  [ngClass]="{'active': modifyType === 0}">Basic Settings</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" (click)="setModifyType(1)" href="#"  [ngClass]="{'active': modifyType === 1}">Alert Settings</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" (click)="setModifyType(2)" href="#"  [ngClass]="{'active': modifyType === 2}">Network Settings</a>
-          </li>
-        </ul>
+<div>
+  <modal #modal [size]="sm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title"> Modify Unit</h4>
+    </modal-header>
+    <modal-body>
+      <div class="row">
+        <div class="col-md-3">
+          <ul class="nav nav-pills outline-active">
+            <li class="nav-item">
+              <a class="nav-link" (click)="setModifyType(0)" href="#"  [ngClass]="{'active': modifyType === 0}">Basic Settings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)="setModifyType(1)" href="#"  [ngClass]="{'active': modifyType === 1}">Alert Settings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)="setModifyType(2)" href="#"  [ngClass]="{'active': modifyType === 2}">Network Settings</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <div *ngIf="modifyType === 0">
+            <form [formGroup]="unitBasicForm" >
+              <div class="form-group row">
+                <label for="towerfrom" class="col-sm-6 form-control-label">TowerFrom</label>
+                <input id="towerfrom" class="col-sm-6 form-control form-control-sm" formControlName="towerfrom" type="text" placeholder="from"/>
+              </div>
+              <div class="form-group row">
+                <label for="towerto" class="col-sm-6 form-control-label">TowerTo</label>
+                <input id="towerto" class="col-sm-6 form-control form-control-sm" formControlName="towerto" type="text" placeholder="to"/>
+              </div>
+              <div class="form-group row">
+                <label for="idintower" class="col-sm-6 form-control-label">IdInTower</label>
+                <input id="idintower" class="col-sm-6 form-control form-control-sm" formControlName="idintower" type="text" placeholder="to"/>
+              </div>
+              <div class="form-group row">
+                <label for="phonenum" class="col-sm-6 form-control-label">PhoneNum</label>
+                <input id="phonenum" class="col-sm-6 form-control form-control-sm" formControlName="phonenum" type="text" placeholder="phonenum"/>
+              </div>
+              <div class="form-group row">
+                <label for="imei" class="col-sm-6 form-control-label">IMEI</label>
+                <input id="imei" class="col-sm-6 form-control form-control-sm" formControlName="identity" type="text" placeholder="imei"/>
+              </div>
+              <div class="form-group row">
+                <label for="location" class="col-sm-6 form-control-label">Location</label>
+                <input id="location" class="col-sm-6 form-control form-control-sm" formControlName="location" type="text" placeholder="location"/>
+              </div>
+            </form>
+          </div>
+          <div  *ngIf="modifyType === 1">
+            <form [formGroup]="unitAlertForm">
+              <div class="form-group row">
+                <label for="distance1" class="col-sm-6 form-control-label">Distance1</label>
+                <input id="distance1" class="col-sm-6 form-control form-control-sm" formControlName="alertdistance1" type="text" placeholder="distance1"/>
+              </div>
+              <div class="form-group row">
+                <label for="distance2" class="col-sm-6 form-control-label">Distance2</label>
+                <input id="distance2" class="col-sm-6 form-control form-control-sm" formControlName="alertdistance2" type="text" placeholder="distance2"/>
+              </div>
+              <div class="form-group row">
+                <label for="distance3" class="col-sm-6 form-control-label">Distance3</label>
+                <input id="distance3" class="col-sm-6 form-control form-control-sm" formControlName="alertdistance3" type="text" placeholder="distance3"/>
+              </div>
+              <div class="form-group row">
+                <label class="c-input c-checkbox col-sm-10">
+                  <input type="checkbox" formControlName="picenable">
+                  <span class="c-indicator"></span> Enable picture
+                </label>
+              </div>
+              <div class="form-group row" >
+                <label for="picresolution" class="col-sm-6 form-control-label">PicResolution</label>
+                <select id="picresolution" class="c-select col-sm-6 form-control form-control-sm" formControlName="picresolution">
+                  <option selected>Select resolution</option>
+                  <option value="640x480">640x480</option>
+                  <option value="800x600">800x600</option>
+                  <option value="1024x768">1024x768</option>
+                </select>
+              </div>
+              <div class="form-group row">
+                <label class="c-input c-checkbox col-sm-10">
+                  <input type="checkbox" formControlName="piclightenhance">
+                  <span class="c-indicator"></span>Light Enhance
+                </label>
+              </div>
+              <div class="form-group row">
+                <label class="c-input c-checkbox col-sm-10">
+                  <input type="checkbox" formControlName="highsensitivity">
+                  <span class="c-indicator"></span>High Sensitivity
+                </label>
+              </div>
+              <div class="form-group row">
+                <label class="c-input c-checkbox col-sm-10">
+                  <input type="checkbox" formControlName="beep">
+                  <span class="c-indicator"></span>Beep
+                </label>
+              </div>
+            </form>
+          </div>
+          <div  *ngIf="modifyType === 2">
+            <form [formGroup]="unitNetworkForm">
+              <div class="form-group row">
+                <label for="ipaddress" class="col-sm-6 form-control-label">Server address</label>
+                <input id="ipaddress" class="col-sm-6 form-control form-control-sm" formControlName="serverip" type="text" placeholder="server ip"/>
+              </div>
+              <div class="form-group row">
+                <label for="serverport" class="col-sm-6 form-control-label">Server port</label>
+                <input id="serverport" class="col-sm-6 form-control form-control-sm" formControlName="serverport" type="text" placeholder="server port"/>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="col-md-6">
-        <div *ngIf="modifyType === 0">
-          <form [formGroup]="unitBasicForm" >
-            <div class="form-group row">
-              <label for="towerfrom" class="col-sm-6 form-control-label">TowerFrom</label>
-              <input id="towerfrom" class="col-sm-6 form-control form-control-sm" formControlName="towerfrom" type="text" placeholder="from"/>
-            </div>
-            <div class="form-group row">
-              <label for="towerto" class="col-sm-6 form-control-label">TowerTo</label>
-              <input id="towerto" class="col-sm-6 form-control form-control-sm" formControlName="towerto" type="text" placeholder="to"/>
-            </div>
-            <div class="form-group row">
-              <label for="idintower" class="col-sm-6 form-control-label">IdInTower</label>
-              <input id="idintower" class="col-sm-6 form-control form-control-sm" formControlName="idintower" type="text" placeholder="to"/>
-            </div>
-            <div class="form-group row">
-              <label for="phonenum" class="col-sm-6 form-control-label">PhoneNum</label>
-              <input id="phonenum" class="col-sm-6 form-control form-control-sm" formControlName="phonenum" type="text" placeholder="phonenum"/>
-            </div>
-            <div class="form-group row">
-              <label for="imei" class="col-sm-6 form-control-label">IMEI</label>
-              <input id="imei" class="col-sm-6 form-control form-control-sm" formControlName="identity" type="text" placeholder="imei"/>
-            </div>
-            <div class="form-group row">
-              <label for="location" class="col-sm-6 form-control-label">Location</label>
-              <input id="location" class="col-sm-6 form-control form-control-sm" formControlName="location" type="text" placeholder="location"/>
-            </div>
-          </form>
-        </div>
-        <div  *ngIf="modifyType === 1">
-          <form [formGroup]="unitAlertForm">
-            <div class="form-group row">
-              <label for="distance1" class="col-sm-6 form-control-label">Distance1</label>
-              <input id="distance1" class="col-sm-6 form-control form-control-sm" formControlName="alertdistance1" type="text" placeholder="distance1"/>
-            </div>
-            <div class="form-group row">
-              <label for="distance2" class="col-sm-6 form-control-label">Distance2</label>
-              <input id="distance2" class="col-sm-6 form-control form-control-sm" formControlName="alertdistance2" type="text" placeholder="distance2"/>
-            </div>
-            <div class="form-group row">
-              <label for="distance3" class="col-sm-6 form-control-label">Distance3</label>
-              <input id="distance3" class="col-sm-6 form-control form-control-sm" formControlName="alertdistance3" type="text" placeholder="distance3"/>
-            </div>
-            <div class="form-group row">
-              <label class="c-input c-checkbox col-sm-10">
-                <input type="checkbox" formControlName="picenable">
-                <span class="c-indicator"></span> Enable picture
-              </label>
-            </div>
-            <div class="form-group row" >
-              <label for="picresolution" class="col-sm-6 form-control-label">PicResolution</label>
-              <select id="picresolution" class="c-select col-sm-6 form-control form-control-sm" formControlName="picresolution">
-                <option selected>Select resolution</option>
-                <option value="640x480">640x480</option>
-                <option value="800x600">800x600</option>
-                <option value="1024x768">1024x768</option>
-              </select>
-            </div>
-            <div class="form-group row">
-              <label class="c-input c-checkbox col-sm-10">
-                <input type="checkbox" formControlName="piclightenhance">
-                <span class="c-indicator"></span>Light Enhance
-              </label>
-            </div>
-            <div class="form-group row">
-              <label class="c-input c-checkbox col-sm-10">
-                <input type="checkbox" formControlName="highsensitivity">
-                <span class="c-indicator"></span>High Sensitivity
-              </label>
-            </div>
-            <div class="form-group row">
-              <label class="c-input c-checkbox col-sm-10">
-                <input type="checkbox" formControlName="beep">
-                <span class="c-indicator"></span>Beep
-              </label>
-            </div>
-          </form>
-        </div>
-        <div  *ngIf="modifyType === 2">
-          <form [formGroup]="unitNetworkForm">
-            <div class="form-group row">
-              <label for="ipaddress" class="col-sm-6 form-control-label">Server address</label>
-              <input id="ipaddress" class="col-sm-6 form-control form-control-sm" formControlName="serverip" type="text" placeholder="server ip"/>
-            </div>
-            <div class="form-group row">
-              <label for="serverport" class="col-sm-6 form-control-label">Server port</label>
-              <input id="serverport" class="col-sm-6 form-control form-control-sm" formControlName="serverport" type="text" placeholder="server port"/>
-            </div>
-          </form>
-        </div>
+      <div class="row">
+        <list-errors [errors]="errors"></list-errors>
       </div>
-    </div>
-    <div class="row">
-      <list-errors [errors]="errors"></list-errors>
-    </div>
-  </div>
-  <div class="dlg-footer">
-    <button type="button" class="btn btn-secondary" (click)="modifydlg.hide()">Cancel</button>
-    <button type="button" class="btn btn-primary" (click)="submitModify(selectedUnit)">Save changes</button>
-  </div>
-</dialog>
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.dismiss()">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="submitModify(selectedUnit)">Save changes</button>
+
+    </modal-footer>
+  </modal>
+
+
+</div>

@@ -12,6 +12,7 @@ import {isUndefined} from "util";
 import {Sms} from "../models/sms.model";
 import {SmsService} from "../services/sms.service";
 import {UnitEditDialogComponent} from "../dialogs/";
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 
 
 @Component({
@@ -27,6 +28,7 @@ export class UnitinfoComponent implements OnInit {
   @ViewChild(UnitEditDialogComponent)
   public readonly _modal: UnitEditDialogComponent;
 
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -38,9 +40,6 @@ export class UnitinfoComponent implements OnInit {
 
   }
 
-  setModifyType(type: number){
-      this._modal.modifyType = type;
-  }
 
   ngOnInit()
   {

@@ -9,7 +9,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {UnitService} from "../services/units.service";
 import {UserService} from "../services/user.service";
 import {isUndefined} from "util";
-import {DialogComponent} from "../dialogs/dialog.component";
 import {TreeComponent} from 'angular-tree-component';
 declare var $:any;
 
@@ -24,9 +23,6 @@ export class UnitbarComponent implements OnInit {
   canModify: boolean;
   isSubmitting = false;
   isDeleting = false;
-
-  @ViewChild(DialogComponent)
-  public readonly _modal: DialogComponent;
 
   @ViewChild(TreeComponent)
   public readonly _tree: TreeComponent;
@@ -86,12 +82,12 @@ export class UnitbarComponent implements OnInit {
 
   addUnit(unit: Unit){
     console.log('add unit from line:' + unit.name)
-    this._modal.show();
+   // this._modal.show();
   }
 
   addCity(){
     console.log('add city');
-    this._modal.show();
+   // this._modal.show();
   }
 
   searchChange(searchText){

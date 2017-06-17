@@ -2,26 +2,36 @@
  * Created by jackiezhang on 2017/6/12.
  */
 
-import {AfterViewInit, Component, ElementRef, Input, Output} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, Input, Output, ViewChild} from "@angular/core";
 import { Router  } from "@angular/router";
 import {UserService} from "../services/user.service";
-import {DialogComponent}from './dialog.component';
 import {FormBuilder} from "@angular/forms";
 import {FormGroup} from "@angular/forms/src/model";
 import {Unit} from "../models/unit.model";
 import {UnitService} from "../services/units.service";
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 
 
 
 @Component({
   selector: 'uniteditdialog',
   templateUrl:  './uniteditdialog.component.html',
+  styles:  [`    
+    modal{
+      overflow-y: initial !important
+    }
+    modal-body{
+      height: 300px;
+      overflow-y: auto;
+    }`]
 })
-export class UnitEditDialogComponent extends DialogComponent {
+export class UnitEditDialogComponent {
   unitBasicForm: FormGroup;
   unitAlertForm: FormGroup;
   unitNetworkForm: FormGroup;
   isSubmitting = false;
+
+  errors: Object = {};
 
   @Input()
   selectedUnit: Unit;
@@ -29,11 +39,13 @@ export class UnitEditDialogComponent extends DialogComponent {
   @Input()
   modifyType: number;
 
+  @ViewChild(ModalComponent)
+  private readonly _modal: ModalComponent;
+
   constructor(
     private fb: FormBuilder,
     private unitService: UnitService
   ){
-    super();
     this.unitBasicForm = this.fb.group({
       towerfrom: '',
       towerto: '',
@@ -82,6 +94,10 @@ export class UnitEditDialogComponent extends DialogComponent {
     this.updateUnit(unit.networksettings, this.unitNetworkForm.value);
   }
 
+  setModifyType(type: number){
+    this.modifyType = type;
+  }
+
 
   submitModify(unit: Unit) {
     this.isSubmitting = true;
@@ -89,7 +105,7 @@ export class UnitEditDialogComponent extends DialogComponent {
     this.unitService.save(unit)
       .subscribe(
         unit => {
-          this.hide();
+          this._modal.close();
           this.isSubmitting = false;
         },
         err => {
@@ -99,5 +115,7 @@ export class UnitEditDialogComponent extends DialogComponent {
 
   }
 
-
+  show(){
+      this._modal.open();
+  }
 }

@@ -11,9 +11,9 @@ import {FavoriteButtonComponent} from "./buttons/favorite-button.component";
 import {ArticleListConfig} from "./models/article-list-config.model";
 import {ArticleListComponent} from "./article-helpers/article-list.component";
 import {ArticlePreviewComponent} from "./article-helpers/article-preview.component";
-import {DialogComponent} from "./dialogs";
 import { TreeModule } from 'angular-tree-component';
 import {UnitEditDialogComponent} from "./dialogs/uniteditdialog.component";
+import {Ng2Bs3ModalModule} from "ng2-bs3-modal/ng2-bs3-modal";
 
 @NgModule({
   imports: [
@@ -22,7 +22,8 @@ import {UnitEditDialogComponent} from "./dialogs/uniteditdialog.component";
     ReactiveFormsModule,
     HttpModule,
     RouterModule,
-    TreeModule
+    TreeModule,
+    Ng2Bs3ModalModule
   ],
   declarations: [
     ListErrorsComponent,
@@ -32,7 +33,6 @@ import {UnitEditDialogComponent} from "./dialogs/uniteditdialog.component";
     FavoriteButtonComponent,
     ArticleListComponent,
     ArticlePreviewComponent,
-    DialogComponent,
     UnitEditDialogComponent
   ],
   exports: [
@@ -42,6 +42,7 @@ import {UnitEditDialogComponent} from "./dialogs/uniteditdialog.component";
     HttpModule,
     RouterModule,
     TreeModule,
+    Ng2Bs3ModalModule,
     ListErrorsComponent,
     ShowAuthedDirective,
     FollowButtonComponent,
@@ -49,7 +50,6 @@ import {UnitEditDialogComponent} from "./dialogs/uniteditdialog.component";
     FavoriteButtonComponent,
     ArticleListComponent,
     ArticlePreviewComponent,
-    DialogComponent,
     UnitEditDialogComponent
   ],
 

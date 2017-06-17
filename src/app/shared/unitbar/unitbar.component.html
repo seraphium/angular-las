@@ -1,19 +1,6 @@
 <div class="sidebar">
-  <dialog #addunitdlg>
-    <div class="dlg-header">
-      Add Unit
-    </div>
-    <div class="dlg-body">
-      [Add unit]
-      <input type="text">
-      <input type="text">
-      <input type="text">
-    </div>
-    <div class="dlg-footer">
-      <button type="button" class="btn btn-danger" (click)="addunitdlg.hide()">Cancel</button>
-      <button type="button" class="btn btn-primary" (click)="addunitdlg.hide()">Save changes</button>
-    </div>
-  </dialog>
+  <uniteditdialog #addunitdlg>
+  </uniteditdialog>
 
   <p>Unit List  <a href="#" (click)="addCity()"><i class="glyphicon glyphicon-plus"></i></a></p>
   <form class="form-inline">

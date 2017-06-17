@@ -12,7 +12,6 @@ import {UserService} from "../shared/services/user.service";
 import {error, isUndefined} from "util";
 import {ReportListConfig} from "../shared/models/report-list-config.model";
 import {UnitService} from "../shared/services/units.service";
-import {DialogComponent} from "../shared/";
 
 declare var $:any;
 
@@ -48,8 +47,8 @@ export class ReportComponent implements OnInit, AfterViewInit {
 
   @Input() limit: number = 10;
 
-  @ViewChild(DialogComponent)
-  public readonly _modal: DialogComponent;
+//  @ViewChild(DialogComponent)
+//  public readonly _modal: DialogComponent;
 
   get type(): string {
     return this._type;
@@ -158,7 +157,7 @@ export class ReportComponent implements OnInit, AfterViewInit {
   }
 
   showMedia(report: Report) {
-    this._modal.show();
+   // this._modal.show();
 
   }
 
