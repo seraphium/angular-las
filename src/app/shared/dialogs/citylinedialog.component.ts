@@ -5,7 +5,7 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from "@angular/core";
 import { Router  } from "@angular/router";
 import {UserService} from "../services/user.service";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder,Validators } from '@angular/forms';
 import {FormGroup} from "@angular/forms/src/model";
 import {Unit, UnitAlertSettings, UnitNetworkSettings} from "../models/unit.model";
 import {UnitService} from "../services/units.service";

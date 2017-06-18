@@ -4,14 +4,27 @@
       <h4 class="modal-title">{{isNewUnit? "Add" : "Modify"}}</h4>
     </modal-header>
     <modal-body>
-          <form [formGroup]="citylineForm" >
-            <div class="form-group">
-              <label for="name" class="form-control-label">Name</label>
-              <input id="name" class="form-control" formControlName="name" type="text" placeholder="name"/>
+          <form [formGroup]="citylineForm" data-toggle="validator"  >
+            <div class="form-group" >
+              <label for="name" class="control-label">Name</label>
+              <input id="name" name="name" class="form-control"
+                     formControlName="name" type="text" maxlength="32" minlength="1"  placeholder="name" required/>
+              <div *ngIf="citylineForm.value.name.errors && (citylineForm.value.name.dirty || citylineForm.value.name.touched)"
+                   class="alert alert-danger">
+                <div [hidden]="!citylineForm.value.name.errors.required">
+                  Name is required
+                </div>
+                <div [hidden]="!citylineForm.value.name.errors.minlength">
+                  Name must be at least 4 characters long.
+                </div>
+                <div [hidden]="!citylineForm.value.name.errors.maxlength">
+                  Name cannot be more than 24 characters long.
+                </div>
+              </div>
             </div>
             <div class="form-group" *ngIf="modifyType === 1">
-              <label for="voltage" class="form-control-label">Voltage Level</label>
-              <input id="voltage" class="form-control" formControlName="voltage" type="text" placeholder="voltage level"/>
+              <label for="voltage" class="control-label">Voltage Level</label>
+              <input id="voltage" class="form-control" formControlName="voltage" type="text" maxlength="32" placeholder="voltage level"/>
             </div>
           </form>
     </modal-body>
@@ -20,7 +33,7 @@
         <list-errors [errors]="errors" class="col-md-6"></list-errors>
         <div class="col-md-6 pull-md-right">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.dismiss()">Cancel</button>
-          <button type="button" class="btn btn-primary" (click)="submitModify(selectedUnit)">Save changes</button>
+          <button type="submit" class="btn btn-primary" (click)="submitModify(selectedUnit)">Save changes</button>
 
         </div>
 

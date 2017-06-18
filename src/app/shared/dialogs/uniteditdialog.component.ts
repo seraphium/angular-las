@@ -66,33 +66,33 @@ export class UnitEditDialogComponent {
     });
 
     this.unitAlertForm = this.fb.group({
-      alertdistance1: '',
-      alertdistance2: '',
-      alertdistance3: "",
-      picresolution:"",
-      picenable: false,
+      alertdistance1: '300',
+      alertdistance2: '300',
+      alertdistance3: '300',
+      picresolution:'800x600',
+      picenable: true,
       piclightenhance: false,
       beep: false,
       highsensitivity: false
     });
 
     this.unitCameraForm = this.fb.group({
-      camera1mode: "",
-      camera1videoduration:"",
-      camera1videoframerate:"",
-      camera1mediainterval:"",
-      camera2mode: "",
-      camera2videoduration:"",
-      camera2videoframerate:"",
-      camera2mediainterval:"",
-      camera3mode: "",
-      camera3videoduration:"",
-      camera3videoframerate:"",
-      camera3mediainterval:"",
+      camera1mode: "1",
+      camera1videoduration:"1",
+      camera1videoframerate:"1",
+      camera1mediainterval:"1",
+      camera2mode: "1",
+      camera2videoduration:"1",
+      camera2videoframerate:"1",
+      camera2mediainterval:"1",
+      camera3mode: "1",
+      camera3videoduration:"1",
+      camera3videoframerate:"1",
+      camera3mediainterval:"1",
     });
     this.unitNetworkForm = this.fb.group({
-      serverip:"",
-      serverport:""
+      serverip:"121.41.25.64",
+      serverport:"8682"
     });
 
     this.modifyType = 0;
