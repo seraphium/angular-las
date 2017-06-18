@@ -7,9 +7,10 @@ import { Router  } from "@angular/router";
 import {UserService} from "../services/user.service";
 import {FormBuilder} from "@angular/forms";
 import {FormGroup} from "@angular/forms/src/model";
-import {Unit} from "../models/unit.model";
+import {Unit, UnitAlertSettings, UnitNetworkSettings} from "../models/unit.model";
 import {UnitService} from "../services/units.service";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
+import {noUndefined} from "@angular/compiler/src/util";
 
 
 
@@ -29,6 +30,9 @@ export class UnitEditDialogComponent {
   unitBasicForm: FormGroup;
   unitAlertForm: FormGroup;
   unitNetworkForm: FormGroup;
+
+  isNewUnit = false;
+
   isSubmitting = false;
 
   errors: Object = {};
@@ -44,7 +48,8 @@ export class UnitEditDialogComponent {
 
   constructor(
     private fb: FormBuilder,
-    private unitService: UnitService
+    private unitService: UnitService,
+    private userService: UserService
   ){
 
     this.unitBasicForm = this.fb.group({
@@ -91,7 +96,13 @@ export class UnitEditDialogComponent {
 
   updateValue(unit: Unit) {
     this.updateUnit(unit, this.unitBasicForm.value);
+    if (unit.alertsettings === undefined){
+      unit.alertsettings = new UnitAlertSettings();
+    }
     this.updateUnit(unit.alertsettings, this.unitAlertForm.value);
+    if (unit.networksettings === undefined) {
+      unit.networksettings = new UnitNetworkSettings();
+    }
     this.updateUnit(unit.networksettings, this.unitNetworkForm.value);
   }
 
@@ -103,6 +114,7 @@ export class UnitEditDialogComponent {
   submitModify(unit: Unit) {
     this.isSubmitting = true;
     this.updateValue(unit);
+    unit.name = `#${unit.towerfrom}-#${unit.towerto}-${unit.idintower}`;
     this.unitService.save(unit)
       .subscribe(
         unit => {

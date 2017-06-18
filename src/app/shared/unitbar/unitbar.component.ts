@@ -10,6 +10,7 @@ import {UnitService} from "../services/units.service";
 import {UserService} from "../services/user.service";
 import {isUndefined} from "util";
 import {TreeComponent} from 'angular-tree-component';
+import {UnitEditDialogComponent} from "../dialogs/uniteditdialog.component";
 declare var $:any;
 
 @Component({
@@ -26,6 +27,9 @@ export class UnitbarComponent implements OnInit {
 
   @ViewChild(TreeComponent)
   public readonly _tree: TreeComponent;
+
+  @ViewChild(UnitEditDialogComponent)
+  public readonly _modal: UnitEditDialogComponent;
 
   constructor(
     private route: ActivatedRoute,
@@ -81,13 +85,16 @@ export class UnitbarComponent implements OnInit {
   }
 
   addUnit(unit: Unit){
-    console.log('add unit from line:' + unit.name)
-   // this._modal.show();
+    console.log('add unit from line:' + unit.name);
+    this._modal.selectedUnit = new Unit();
+    this._modal.selectedUnit.operators = [this.userService.getCurrentUser().id];
+    this._modal.isNewUnit = true;
+    this._modal.show();
   }
 
   addCity(){
     console.log('add city');
-   // this._modal.show();
+    this._modal.show();
   }
 
   searchChange(searchText){

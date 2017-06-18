@@ -1,7 +1,7 @@
 <div>
   <modal #modal [size]="sm">
     <modal-header [show-close]="true">
-      <h4 class="modal-title"> Modify Unit</h4>
+      <h4 class="modal-title">{{isNewUnit? "Add" : "Modify"}}</h4>
     </modal-header>
     <modal-body>
       <div class="row">
@@ -110,13 +110,18 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <list-errors [errors]="errors"></list-errors>
-      </div>
+
     </modal-body>
     <modal-footer>
-      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.dismiss()">Cancel</button>
-      <button type="button" class="btn btn-primary" (click)="submitModify(selectedUnit)">Save changes</button>
+      <div class="row">
+        <list-errors [errors]="errors" class="col-md-6"></list-errors>
+        <div class="col-md-6 pull-md-right">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.dismiss()">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="submitModify(selectedUnit)">Save changes</button>
+
+        </div>
+
+      </div>
 
     </modal-footer>
   </modal>
