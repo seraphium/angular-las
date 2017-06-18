@@ -14,6 +14,7 @@ import {ArticlePreviewComponent} from "./article-helpers/article-preview.compone
 import { TreeModule } from 'angular-tree-component';
 import {UnitEditDialogComponent} from "./dialogs/uniteditdialog.component";
 import {Ng2Bs3ModalModule} from "ng2-bs3-modal/ng2-bs3-modal";
+import {CityLineDialogComponent} from "./dialogs/citylinedialog.component";
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import {Ng2Bs3ModalModule} from "ng2-bs3-modal/ng2-bs3-modal";
     FavoriteButtonComponent,
     ArticleListComponent,
     ArticlePreviewComponent,
-    UnitEditDialogComponent
+    UnitEditDialogComponent,
+    CityLineDialogComponent
   ],
   exports: [
     CommonModule,
@@ -50,7 +52,8 @@ import {Ng2Bs3ModalModule} from "ng2-bs3-modal/ng2-bs3-modal";
     FavoriteButtonComponent,
     ArticleListComponent,
     ArticlePreviewComponent,
-    UnitEditDialogComponent
+    UnitEditDialogComponent,
+    CityLineDialogComponent
   ],
 
 })

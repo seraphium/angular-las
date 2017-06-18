@@ -1,7 +1,8 @@
 <div class="sidebar">
-  <uniteditdialog>
+  <uniteditdialog #unitedit (submitEvent)="omSubmitted($event)">
   </uniteditdialog>
-
+  <citylinedialog #cityline (submitEvent)="omSubmitted($event)">
+  </citylinedialog>
   <p>Unit List  <a href="#" (click)="addCity()"><i class="glyphicon glyphicon-plus"></i></a></p>
   <form class="form-inline">
     <div class="form-group">

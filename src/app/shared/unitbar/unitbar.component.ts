@@ -10,7 +10,7 @@ import {UnitService} from "../services/units.service";
 import {UserService} from "../services/user.service";
 import {isUndefined} from "util";
 import {TreeComponent} from 'angular-tree-component';
-import {UnitEditDialogComponent} from "../dialogs/uniteditdialog.component";
+import {UnitEditDialogComponent, CityLineDialogComponent} from "../dialogs/";
 declare var $:any;
 
 @Component({
@@ -28,8 +28,11 @@ export class UnitbarComponent implements OnInit {
   @ViewChild(TreeComponent)
   public readonly _tree: TreeComponent;
 
-  @ViewChild(UnitEditDialogComponent)
-  public readonly _modal: UnitEditDialogComponent;
+  @ViewChild("unitedit")
+  public readonly _unitModal: UnitEditDialogComponent;
+
+  @ViewChild("cityline")
+  public readonly _citylineModal: CityLineDialogComponent;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,16 +56,7 @@ export class UnitbarComponent implements OnInit {
       }
   }
 
-  ngOnInit()
-  {
-
-    this.userService.currentUser.subscribe(
-      (userData: User) => {
-        this.currentUser = userData;
-       // this.canModify = (this.currentUser.name === this.article.author.username);
-      }
-    );
-
+  updateUnit(){
     this.unitService.getall().subscribe(units => {
       if (isUndefined(units)){
         this.units = new Array<Unit>();
@@ -76,6 +70,18 @@ export class UnitbarComponent implements OnInit {
         }
       }
     });
+  }
+  ngOnInit()
+  {
+
+    this.userService.currentUser.subscribe(
+      (userData: User) => {
+        this.currentUser = userData;
+       // this.canModify = (this.currentUser.name === this.article.author.username);
+      }
+    );
+    this.updateUnit();
+
 
   }
 
@@ -85,16 +91,42 @@ export class UnitbarComponent implements OnInit {
   }
 
   addUnit(unit: Unit){
-    console.log('add unit from line:' + unit.name);
-    this._modal.selectedUnit = new Unit();
-    this._modal.selectedUnit.operators = [this.userService.getCurrentUser().id];
-    this._modal.isNewUnit = true;
-    this._modal.show();
+    if (unit.type === 0){
+      this.addLine(unit)
+
+    } else {
+      console.log('add unit from line:' + unit.name);
+      this._unitModal.selectedUnit = new Unit();
+      this._unitModal.selectedUnit.operators = [this.userService.getCurrentUser().id];
+      this._unitModal.selectedUnit.parent = unit.id;
+      this._unitModal.isNewUnit = true;
+      this._unitModal.show(2);
+    }
+
+  }
+
+  omSubmitted(result: boolean){
+    if (result) {
+      this.updateUnit();
+
+    }
   }
 
   addCity(){
-    console.log('add city');
-    this._modal.show();
+    this._citylineModal.selectedUnit = new Unit();
+    this._citylineModal.selectedUnit.type = 0;
+    this._citylineModal.selectedUnit.operators = [this.userService.getCurrentUser().id];
+    this._citylineModal.isNewUnit = true;
+    this._citylineModal.show(0);
+  }
+
+  addLine(unit: Unit){
+    this._citylineModal.selectedUnit = new Unit();
+    this._citylineModal.selectedUnit.type = 1;
+    this._citylineModal.selectedUnit.parent = unit.id;
+    this._citylineModal.selectedUnit.operators = [this.userService.getCurrentUser().id];
+    this._citylineModal.isNewUnit = true;
+    this._citylineModal.show(1);
   }
 
   searchChange(searchText){

@@ -1,0 +1,33 @@
+<div>
+  <modal #modal>
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">{{isNewUnit? "Add" : "Modify"}}</h4>
+    </modal-header>
+    <modal-body>
+          <form [formGroup]="citylineForm" >
+            <div class="form-group">
+              <label for="name" class="form-control-label">Name</label>
+              <input id="name" class="form-control" formControlName="name" type="text" placeholder="name"/>
+            </div>
+            <div class="form-group" *ngIf="modifyType === 1">
+              <label for="voltage" class="form-control-label">Voltage Level</label>
+              <input id="voltage" class="form-control" formControlName="voltage" type="text" placeholder="voltage level"/>
+            </div>
+          </form>
+    </modal-body>
+    <modal-footer>
+      <div class="row">
+        <list-errors [errors]="errors" class="col-md-6"></list-errors>
+        <div class="col-md-6 pull-md-right">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.dismiss()">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="submitModify(selectedUnit)">Save changes</button>
+
+        </div>
+
+      </div>
+
+    </modal-footer>
+  </modal>
+
+
+</div>
