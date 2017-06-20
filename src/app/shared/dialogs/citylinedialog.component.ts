@@ -36,7 +36,7 @@ export class CityLineDialogComponent {
   errors: Object = {};
 
   @Input()
-  selectedUnit: Unit;
+  selectedUnit: Unit = new Unit();
 
   @Output()
   submitEvent: EventEmitter<boolean> = new EventEmitter();

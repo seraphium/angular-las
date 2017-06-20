@@ -15,6 +15,7 @@ import { TreeModule } from 'angular-tree-component';
 import {UnitEditDialogComponent} from "./dialogs/uniteditdialog.component";
 import {Ng2Bs3ModalModule} from "ng2-bs3-modal/ng2-bs3-modal";
 import {CityLineDialogComponent} from "./dialogs/citylinedialog.component";
+import {UnitTypeStrFilterPipe} from "./pipes/unit-type-str-filter.pipe";
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import {CityLineDialogComponent} from "./dialogs/citylinedialog.component";
     ArticleListComponent,
     ArticlePreviewComponent,
     UnitEditDialogComponent,
-    CityLineDialogComponent
+    CityLineDialogComponent,
+    UnitTypeStrFilterPipe,
   ],
   exports: [
     CommonModule,
@@ -53,7 +55,9 @@ import {CityLineDialogComponent} from "./dialogs/citylinedialog.component";
     ArticleListComponent,
     ArticlePreviewComponent,
     UnitEditDialogComponent,
-    CityLineDialogComponent
+    CityLineDialogComponent,
+    UnitTypeStrFilterPipe
+
   ],
 
 })

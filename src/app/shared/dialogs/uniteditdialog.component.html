@@ -1,7 +1,7 @@
 <div>
   <modal #modal [size]="sm">
     <modal-header [show-close]="true">
-      <h4 class="modal-title">{{isNewUnit? "Add" : "Modify"}}</h4>
+      <h4 class="modal-title">{{isNewUnit? "Add" : "Modify"}} {{modifyType | unittypestr}}</h4>
     </modal-header>
     <modal-body>
       <div class="row">

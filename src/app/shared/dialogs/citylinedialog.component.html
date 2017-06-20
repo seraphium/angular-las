@@ -1,7 +1,7 @@
 <div>
   <modal #modal>
     <modal-header [show-close]="true">
-      <h4 class="modal-title">{{isNewUnit? "Add" : "Modify"}}</h4>
+      <h4 class="modal-title">{{isNewUnit? "Add" : "Modify"}}  {{selectedUnit.type | unittypestr}}</h4>
     </modal-header>
     <modal-body>
           <form [formGroup]="citylineForm" data-toggle="validator"  >
@@ -22,7 +22,7 @@
                 </div>
               </div>
             </div>
-            <div class="form-group" *ngIf="selectedUnit !== undefined && selectedUnit.type === 1">
+            <div class="form-group" *ngIf="selectedUnit.type === 1">
               <label for="voltage" class="control-label">Voltage Level</label>
               <input id="voltage" class="form-control" formControlName="voltage" type="text" maxlength="32" placeholder="voltage level"/>
             </div>
