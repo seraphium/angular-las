@@ -2,11 +2,14 @@
 
   <uniteditdialog  [selectedUnit]="this.selectedUnit">
   </uniteditdialog>
-  <p>Unit Info</p>
+  <citylinedialog  [selectedUnit]="this.selectedUnit"></citylinedialog>
+  <p *ngIf="selectedUnit.type === 0">City Info</p>
+  <p *ngIf="selectedUnit.type === 1">Line Info</p>
+  <p *ngIf="selectedUnit.type === 2">Unit Info</p>
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <table class="table">
+        <table class="table" *ngIf="selectedUnit.type===2">
           <thead>
           <tr>
             <th>Name</th>
@@ -27,18 +30,45 @@
           </tr>
           </tbody>
         </table>
+        <table class="table" *ngIf="selectedUnit.type===1">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Voltage</th>
+          </thead>
+          <tbody>
+          <tr>
+            <td>{{selectedUnit.name}}</td>
+            <td>{{selectedUnit.voltage}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <table class="table" *ngIf="selectedUnit.type===0">
+          <thead>
+          <tr>
+            <th>Name</th>
+          </thead>
+          <tbody>
+          <tr>
+            <td>{{selectedUnit.name}}</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-6 container">
         <div class="row">
-          <button type="button" class="btn btn-sm btn-secondary"
-                  [disabled]="isSubmitting" (click)="getPhoto(selectedUnit)">Get Photo</button>
+          <button type="button" class="btn btn-sm btn-outline-success"
+              [disabled]="isSubmitting" *ngIf="selectedUnit.type === 2" (click)="getPhoto(selectedUnit)">Get Photo</button>
         </div>
         <div class="row">
           <button type="button" class="btn btn-sm btn-outline-info"
                   [disabled]="isSubmitting" (click)="modifyUnit(selectedUnit)">Modify</button>
         </div>
+        <div class="row">
+          <button type="button" class="btn btn-sm btn-danger"
+                  [disabled]="isSubmitting" (click)="deleteUnit(selectedUnit)">Delete</button>
+        </div>
       </div>
     </div>
   </div>
-
 </div>

@@ -13,6 +13,7 @@ import {Sms} from "../models/sms.model";
 import {SmsService} from "../services/sms.service";
 import {UnitEditDialogComponent} from "../dialogs/";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
+import {CityLineDialogComponent} from "../dialogs/citylinedialog.component";
 
 
 @Component({
@@ -26,7 +27,10 @@ export class UnitinfoComponent implements OnInit {
   isSubmitting: boolean;
 
   @ViewChild(UnitEditDialogComponent)
-  public readonly _modal: UnitEditDialogComponent;
+  public readonly _unitModal: UnitEditDialogComponent;
+
+  @ViewChild(CityLineDialogComponent)
+  public readonly _citylineModal: CityLineDialogComponent;
 
 
   constructor(
@@ -46,7 +50,14 @@ export class UnitinfoComponent implements OnInit {
 
     this.unitService.selectedUnit.subscribe(unit => {
       this.selectedUnit = unit;
-      this._modal.patchValue(unit);
+      switch (unit.type) {
+        case 0:
+        case 1:
+          this._citylineModal.patchValue(unit);
+          break;
+        case 2:
+          this._unitModal.patchValue(unit);
+      }
     });
   }
 
@@ -74,7 +85,18 @@ export class UnitinfoComponent implements OnInit {
   }
 
   modifyUnit(unit: Unit) {
-    this._modal.show();
+    switch (unit.type) {
+      case 0:
+      case 1:
+        this._citylineModal.show();
+        break;
+      case 2:
+        this._unitModal.show();
+    }
+  }
+
+  deleteUnit(unit: Unit){
+
   }
 
 

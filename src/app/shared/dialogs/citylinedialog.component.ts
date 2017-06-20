@@ -38,9 +38,6 @@ export class CityLineDialogComponent {
   @Input()
   selectedUnit: Unit;
 
-  @Input()
-  modifyType: number;
-
   @Output()
   submitEvent: EventEmitter<boolean> = new EventEmitter();
 
@@ -59,7 +56,6 @@ export class CityLineDialogComponent {
     });
 
 
-    this.modifyType = 0;
   }
 
   patchValue(unit: Unit) {
@@ -82,7 +78,6 @@ export class CityLineDialogComponent {
   submitModify(unit: Unit) {
     this.isSubmitting = true;
     this.updateValue(unit);
-    unit.type = this.modifyType === 0?0:1;
     this.unitService.save(unit)
       .subscribe(
         unit => {
@@ -100,7 +95,6 @@ export class CityLineDialogComponent {
   }
 
   show(type: number = 0){
-      this.modifyType = type;
       this._modal.open();
   }
 }
