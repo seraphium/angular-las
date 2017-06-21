@@ -41,7 +41,9 @@ export class UnitbarComponent implements OnInit {
     private userService: UserService
   ){
 
-
+      this.unitService.refreshEvent.subscribe(evt => {
+        this.updateUnit();
+      })
   }
 
   getChildren(unit:Unit) : Array<Unit> {

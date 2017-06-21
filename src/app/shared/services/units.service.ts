@@ -2,7 +2,7 @@
  * Created by zezhang on 2017/5/8.
  */
 
-import {Injectable} from "@angular/core";
+import {EventEmitter, Injectable, Output} from "@angular/core";
 import {ApiService} from "./api.service";
 import {Observable} from "rxjs/Observable";
 import {Unit} from "../models/unit.model";
@@ -21,6 +21,9 @@ export class UnitService  {
 
   public unitsSubject = new BehaviorSubject<Unit>(new Unit());
   public units = this.unitsSubject.asObservable().distinctUntilChanged();
+
+  @Output()
+  public refreshEvent: EventEmitter<boolean> = new EventEmitter();
 
   query(config: UnitListConfig): Observable<{units: Unit[], unitsCount: number}>  {
       let params: URLSearchParams =  new URLSearchParams();
@@ -61,8 +64,8 @@ export class UnitService  {
       }
   }
 
-  destroy(id) {
-      return this.apiService.delete('/units/' + id);
+  destroy(unit: Unit) {
+      return this.apiService.post('/units/delete/' + unit.id);
   }
 
 }

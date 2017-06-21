@@ -96,7 +96,14 @@ export class UnitinfoComponent implements OnInit {
   }
 
   deleteUnit(unit: Unit){
+    this.unitService.destroy(unit).subscribe(data => {
+      alert('delete succeed');
+      this.unitService.refreshEvent.emit(true);
+    },
+      error => {
+        alert(JSON.stringify(error.errors));
 
+      });
   }
 
 
